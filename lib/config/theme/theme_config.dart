@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/config/theme/theme.dart';
@@ -7,22 +8,24 @@ class ThemeConfig {
   static ThemeData get light => theme(Palette.colorScheme);
   static ThemeData get dark => theme(Palette.darkColorScheme);
 
-  static void setSystemBarsStyle(BuildContext context) {
-    final theme = Theme.of(context);
-    final brightness = theme.brightness == Brightness.light
-        ? Brightness.dark
-        : Brightness.light;
+  static void setSystemBarsStyle() {
+    final isLightMode = SchedulerBinding.instance!.window.platformBrightness ==
+        Brightness.light;
+    final brightness = isLightMode ? Brightness.dark : Brightness.light;
+    final color = isLightMode
+        ? Palette.colorScheme.background
+        : Palette.darkColorScheme.background;
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: color,
         statusBarBrightness: brightness,
         statusBarIconBrightness: brightness,
-        // systemStatusBarContrastEnforced: ,
-        systemNavigationBarColor: theme.backgroundColor,
+        systemNavigationBarColor: color,
         systemNavigationBarIconBrightness: brightness,
-        // systemNavigationBarDividerColor: ,
+        // systemStatusBarContrastEnforced: ,
         // systemNavigationBarContrastEnforced: ,
+        // systemNavigationBarDividerColor: ,
       ),
     );
   }
