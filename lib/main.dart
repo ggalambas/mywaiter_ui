@@ -18,15 +18,14 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    ThemeConfig.setSystemBarsStyle(context);
+    ThemeConfig.setSystemBarsStyle();
     WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed)
-      ThemeConfig.setSystemBarsStyle(context);
-    super.didChangeAppLifecycleState(state);
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    ThemeConfig.setSystemBarsStyle();
   }
 
   @override
