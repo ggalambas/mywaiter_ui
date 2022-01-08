@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mywaiter_design/config/theme/theme_config.dart';
+import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/pages/login_page.dart';
 
 void main() {
@@ -41,6 +42,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       theme: ThemeConfig.light,
       darkTheme: ThemeConfig.dark,
       themeMode: ThemeMode.system,
+      routes: {
+        LoginPage.route: (_) => const LoginPage(),
+        HomePage.route: (_) => const HomePage(),
+      },
       home: const LoginPage(),
     );
   }

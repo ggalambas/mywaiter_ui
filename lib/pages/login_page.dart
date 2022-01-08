@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mywaiter_design/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
+  static String route = '/login';
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -36,7 +38,8 @@ class LoginPage extends StatelessWidget {
                   ),
                   const Text('Forgot your password?'),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.pushNamed(context, HomePage.route),
                     child: const Text('Login'),
                   ),
                   const Center(
