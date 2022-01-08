@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 ThemeData theme(ColorScheme colorScheme) => ThemeData(
       colorScheme: colorScheme,
-      // primaryColor: colorScheme.primary,
-      // backgroundColor: colorScheme.background,
+      primaryColor: colorScheme.primary,
+      backgroundColor: colorScheme.background,
+      errorColor: colorScheme.error,
       scaffoldBackgroundColor: colorScheme.background,
       canvasColor: colorScheme.background,
       appBarTheme: _appBarTheme(colorScheme),

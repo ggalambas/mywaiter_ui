@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 45,
             child: Center(
               child: SvgPicture.asset(
                 'assets/logo.svg',
@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Expanded(
-              flex: 3,
+              flex: 55,
               child: Column(
                 children: [
                   const TextField(
