@@ -7,7 +7,8 @@ class ThemeConfig {
   static ThemeData get light => theme(Palette.colorScheme);
   static ThemeData get dark => theme(Palette.darkColorScheme);
 
-  static void setSystemBarsStyle(ThemeData theme) {
+  static void setSystemBarsStyle(BuildContext context) {
+    final theme = Theme.of(context);
     final brightness = theme.brightness == Brightness.light
         ? Brightness.dark
         : Brightness.light;
