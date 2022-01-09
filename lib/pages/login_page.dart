@@ -7,8 +7,13 @@ class LoginPage extends StatelessWidget {
 
   double screenHeight(BuildContext context) =>
       MediaQuery.of(context).size.height -
-      MediaQuery.of(context).padding.top -
-      kToolbarHeight;
+      MediaQuery.of(context).padding.top /* -kToolbarHeight */;
+
+  //* to do:
+  //* text styles
+  //* spacers
+  //* facebook / google
+  //* clean
 
   @override
   Widget build(BuildContext context) {
@@ -31,47 +36,56 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                    flex: 55,
+                  flex: 55,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
                     child: Column(
                       children: [
                         TextField(
                           decoration: InputDecoration(
-                            filled: true,
                             hintText: 'Email',
                           ),
                         ),
+                        SizedBox(height: 16),
                         TextField(
                           decoration: InputDecoration(
                             hintText: 'Password',
                           ),
                         ),
-                        Text('Forgot your password?'),
+                        SizedBox(height: 8),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          alignment: Alignment.centerLeft,
+                          child: Text('Forgot your password?'),
+                        ),
+                        SizedBox(height: 24),
                         ElevatedButton(
                           onPressed: () =>
                               Navigator.pushNamed(context, HomePage.route),
                           child: Text('Login'),
                         ),
-                        Center(
-                          child: Text('or login with'),
-                        ),
-                        Row(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('G'),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('F'),
-                            )
-                          ],
-                        ),
-                        Center(
-                          child: Text('Don\'t have an account? Register'),
-                        ),
+                        SizedBox(height: 24),
+                        Text('or login with'),
+                        SizedBox(height: 16),
+                        // Row(
+                        //   children: [
+                        //     ElevatedButton(
+                        //       onPressed: () {},
+                        //       child: Text('G'),
+                        //     ),
+                        //     ElevatedButton(
+                        //       onPressed: () {},
+                        //       child: Text('F'),
+                        //     )
+                        //   ],
+                        // ),
+                        SizedBox(height: 24),
+                        Text('Don\'t have an account? Register'),
                         // register
                       ],
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
