@@ -4,7 +4,6 @@ import 'package:mywaiter_design/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   static String route = '/login';
-  const LoginPage({Key? key}) : super(key: key);
 
   double screenHeight(BuildContext context) =>
       MediaQuery.of(context).size.height -

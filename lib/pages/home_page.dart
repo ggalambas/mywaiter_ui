@@ -3,7 +3,6 @@ import 'package:lucide_icons/lucide_icons.dart';
 
 class HomePage extends StatefulWidget {
   static String route = '/home';
-  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
