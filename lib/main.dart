@@ -43,10 +43,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       darkTheme: ThemeConfig.dark,
       themeMode: ThemeMode.system,
       routes: {
-        LoginPage.route: (_) => const LoginPage(),
-        HomePage.route: (_) => const HomePage(),
+        LoginPage.route: (_) => LoginPage(),
+        HomePage.route: (_) => HomePage(),
       },
-      home: const LoginPage(),
+      home: LoginPage(),
     );
   }
 }
