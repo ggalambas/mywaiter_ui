@@ -27,7 +27,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabs[tabIndex],
+      body: SafeArea(
+          child: Padding(
+              padding: EdgeInsets.only(top: 8)
+                  .add(EdgeInsets.symmetric(horizontal: 16)),
+              child: tabs[tabIndex])),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: tabIndex,
         onTap: (index) => setState(() => tabIndex = index),
