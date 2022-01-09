@@ -14,15 +14,15 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
     );
 
 BottomNavigationBarThemeData _bottomNavigationBarTheme() =>
-    const BottomNavigationBarThemeData(elevation: 0);
+    BottomNavigationBarThemeData(elevation: 0);
 
-InputDecorationTheme _inputDecorationTheme() =>
-    const InputDecorationTheme(border: InputBorder.none);
+InputDecorationTheme _inputDecorationTheme() => InputDecorationTheme(
+      border: InputBorder.none,
+    );
 
-AppBarTheme _appBarTheme(ColorScheme colorScheme) =>
-    const AppBarTheme(elevation: 0);
+AppBarTheme _appBarTheme(ColorScheme colorScheme) => AppBarTheme(elevation: 0);
 
-ScrollbarThemeData _scrollbarTheme() => const ScrollbarThemeData(
+ScrollbarThemeData _scrollbarTheme() => ScrollbarThemeData(
     // thumbColor: MaterialStateColor.resolveWith((states) {
     //   if (states.contains(MaterialState.dragged)) return Colors.black54;
     //   if (states.contains(MaterialState.hovered)) return Colors.black54;
