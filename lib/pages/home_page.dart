@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:mywaiter_design/pages/home_tabs/feed_tab.dart';
+import 'package:mywaiter_design/pages/home_tabs/orders_tab.dart';
+import 'package:mywaiter_design/pages/home_tabs/search_tab.dart';
+
+abstract class HomeTab extends StatelessWidget {
+  IconData get icon;
+  String get label;
+}
 
 class HomePage extends StatefulWidget {
   static String route = '/home';
@@ -9,37 +16,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int pageIndex = 0;
+  int tabIndex = 0;
 
-  final List<Widget> pages = [
-    Container(color: Colors.blueAccent),
-    Container(color: Colors.greenAccent),
-    Container(color: Colors.orangeAccent),
+  final List<HomeTab> tabs = [
+    FeedTab(),
+    SearchTab(),
+    OrdersTab(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[pageIndex],
+      body: tabs[tabIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: pageIndex,
-        onTap: (index) => setState(() => pageIndex = index),
+        currentIndex: tabIndex,
+        onTap: (index) => setState(() => tabIndex = index),
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(LucideIcons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LucideIcons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LucideIcons.clipboardList),
-            label: 'Orders',
-          ),
-        ],
+        items: tabs
+            .map((tab) => BottomNavigationBarItem(
+                  icon: Icon(tab.icon),
+                  label: tab.label,
+                ))
+            .toList(),
       ),
     );
   }
