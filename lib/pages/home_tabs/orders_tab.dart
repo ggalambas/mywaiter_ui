@@ -2,26 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 
-class OrdersTab extends HomeTab {
+class OrdersTab extends StatelessWidget with HomeTab {
   @override
   final IconData icon = LucideIcons.clipboardList;
   @override
   final String label = 'Orders';
 
+  //* to do:
+  //* profile button and page
+
+  @override
+  PreferredSizeWidget get appBar => AppBar(
+        automaticallyImplyLeading: false,
+        title: Text('Your Orders'),
+        actions: [
+          //! profile
+        ],
+      );
+
   @override
   Widget build(BuildContext context) {
-    //! search
     return Column(
       children: [
-        OrderTile(),
-        SizedBox(height: 16),
-        OrderTile(),
-        SizedBox(height: 16),
-        OrderTile(),
-        SizedBox(height: 16),
-        OrderTile(),
-        SizedBox(height: 16),
-        OrderTile(),
+        for (var i = 0; i < 5; i++) ...[OrderTile(), SizedBox(height: 16)]
       ],
     );
   }
@@ -36,19 +39,21 @@ class OrderTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
       height: height,
       child: Row(
         children: [
           CircleAvatar(
+            // the restaurant image
             foregroundImage: NetworkImage(
               'https://via.placeholder.com/'
               '150/FFD800/FFFFFF/?text=${name.substring(0, 2)}',
             ),
-            // backgroundImage: , // a default image of the assets
-            backgroundColor: Colors.amber,
+            // a default image of the assets instead of color
+            // backgroundImage: ,
+            backgroundColor: theme.colorScheme.surface,
             radius: height / 2,
-            child: Text(name.substring(0, 2)),
           ),
           SizedBox(width: 12),
           Column(

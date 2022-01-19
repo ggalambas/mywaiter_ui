@@ -3,9 +3,10 @@ import 'package:mywaiter_design/pages/home_tabs/feed_tab.dart';
 import 'package:mywaiter_design/pages/home_tabs/orders_tab.dart';
 import 'package:mywaiter_design/pages/home_tabs/search_tab.dart';
 
-abstract class HomeTab extends StatelessWidget {
+mixin HomeTab on Widget {
   IconData get icon;
   String get label;
+  PreferredSizeWidget? get appBar => null;
 }
 
 class HomePage extends StatefulWidget {
@@ -27,11 +28,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: tabs[tabIndex].appBar,
       body: SafeArea(
-          child: Padding(
-              padding: EdgeInsets.only(top: 8)
-                  .add(EdgeInsets.symmetric(horizontal: 16)),
-              child: tabs[tabIndex])),
+        child: Padding(
+            padding: EdgeInsets.only(top: 8)
+                .add(EdgeInsets.symmetric(horizontal: 16)),
+            child: tabs[tabIndex]),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: tabIndex,
         onTap: (index) => setState(() => tabIndex = index),
