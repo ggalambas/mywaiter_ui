@@ -29,6 +29,7 @@ class OrdersTab extends StatelessWidget with HomeTab {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.only(top: 8),
       children: [for (var i = 0; i < 15; i++) OrderTile()],
     );
   }
