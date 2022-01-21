@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
-import 'package:mywaiter_design/widget/svg_icon.dart';
+import 'package:mywaiter_design/widgets/svg_icon.dart';
 
 class FeedTab extends StatelessWidget with HomeTab {
   @override

@@ -3,7 +3,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
-import 'package:mywaiter_design/widget/svg_icon.dart';
+import 'package:mywaiter_design/widgets/svg_icon.dart';
 
 class SearchTab extends StatefulWidget with HomeTab {
   @override
