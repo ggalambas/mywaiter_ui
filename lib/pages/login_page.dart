@@ -10,10 +10,6 @@ class LoginPage extends StatelessWidget {
       MediaQuery.of(context).size.height -
       MediaQuery.of(context).padding.top /* -kToolbarHeight */;
 
-  //* to do:
-  //* facebook / google
-  //* clean
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
