@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:mywaiter_design/components/item_tile.dart';
 import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
-import 'package:mywaiter_design/widgets/item_tile.dart';
 import 'package:mywaiter_design/widgets/suffix_icon.dart';
 import 'package:mywaiter_design/widgets/svg_icon.dart';
 

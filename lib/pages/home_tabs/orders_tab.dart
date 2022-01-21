@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mywaiter_design/components/item_tile.dart';
 import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
-import 'package:mywaiter_design/widgets/item_tile.dart';
 import 'package:mywaiter_design/widgets/svg_icon.dart';
 
 class OrdersTab extends StatelessWidget with HomeTab {
