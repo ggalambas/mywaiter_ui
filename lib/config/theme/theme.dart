@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mywaiter_design/config/constants.dart';
 
 ThemeData theme(ColorScheme colorScheme) => ThemeData(
@@ -8,6 +9,7 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
       errorColor: colorScheme.error,
       scaffoldBackgroundColor: colorScheme.background,
       canvasColor: colorScheme.background,
+      textTheme: GoogleFonts.poppinsTextTheme(),
       appBarTheme: _appBarTheme(colorScheme),
       scrollbarTheme: _scrollbarTheme(),
       inputDecorationTheme: _inputDecorationTheme(),
