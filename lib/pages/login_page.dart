@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/widgets/suffix_icon.dart';
 
@@ -62,7 +63,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(height: 8),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: kScreenPadding,
+                          ),
                           alignment: Alignment.centerLeft,
                           child: Text.rich(
                             TextSpan(

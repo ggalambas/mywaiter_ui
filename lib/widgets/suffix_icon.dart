@@ -9,16 +9,11 @@ class SuffixIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Padding(
       padding: EdgeInsets.only(right: 8),
       child: GestureDetector(
         onTap: onTap,
-        child: Icon(
-          icon,
-          size: kSmallIconSize,
-          color: theme.colorScheme.onSurface,
-        ),
+        child: Icon(icon, size: kSmallIconSize),
       ),
     );
   }

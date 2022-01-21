@@ -30,6 +30,7 @@ InputDecorationTheme _inputDecorationTheme(ColorScheme colorScheme) =>
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
       hintStyle: TextStyle(color: colorScheme.onSurface),
+      iconColor: colorScheme.onSurface,
     );
 
 ElevatedButtonThemeData _elevatedButtonTheme() => ElevatedButtonThemeData(

@@ -32,12 +32,7 @@ class _HomePageState extends State<HomePage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: tabs[tabIndex].appBar,
-      body: SafeArea(
-        child: Padding(
-            padding: EdgeInsets.only(top: 8)
-                .add(EdgeInsets.symmetric(horizontal: 16)),
-            child: tabs[tabIndex]),
-      ),
+      body: SafeArea(child: tabs[tabIndex]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: tabIndex,
         onTap: (index) => setState(() => tabIndex = index),
