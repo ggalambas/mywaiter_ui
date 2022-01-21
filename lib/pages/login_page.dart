@@ -1,14 +1,22 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
+import 'package:mywaiter_design/widgets/suffix_icon.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   static String route = '/login';
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool obscurePassword = true;
+
   double screenHeight(BuildContext context) =>
-      MediaQuery.of(context).size.height -
-      MediaQuery.of(context).padding.top /* -kToolbarHeight */;
+      MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +43,21 @@ class LoginPage extends StatelessWidget {
                     child: Column(
                       children: [
                         TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Email',
-                          ),
+                          decoration: InputDecoration(hintText: 'Email'),
                         ),
                         SizedBox(height: 8),
                         TextField(
+                          obscureText: obscurePassword,
                           decoration: InputDecoration(
                             hintText: 'Password',
+                            suffixIcon: SuffixIcon(
+                              obscurePassword
+                                  ? LucideIcons.eye
+                                  : LucideIcons.eyeOff,
+                              onTap: () => setState(() {
+                                obscurePassword = !obscurePassword;
+                              }),
+                            ),
                           ),
                         ),
                         SizedBox(height: 8),

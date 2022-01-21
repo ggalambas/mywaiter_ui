@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
 
@@ -30,12 +31,11 @@ class _SearchTabState extends State<SearchTab> {
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             hintText: 'Search',
-            prefixIcon:
-                IconButton(onPressed: null, icon: Icon(LucideIcons.search)),
+            prefixIcon: Icon(LucideIcons.search),
             suffixIcon: controller.text.isEmpty
                 ? null
                 : IconButton(
-                    iconSize: 18, // kSmallIconSize
+                    iconSize: kSmallIconSize,
                     tooltip: 'Clear',
                     onPressed: () => controller.text = '',
                     icon: Icon(LucideIcons.x),
