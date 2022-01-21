@@ -14,20 +14,20 @@ class OrdersTab extends StatelessWidget with HomeTab {
   final Widget activeIcon = SvgIcon('assets/clipboard_list_filled.svg');
 
   //* to do:
-  //* profile button and page
+  //* profile
+  //* orders
 
   @override
   PreferredSizeWidget get appBar => AppBar(
         automaticallyImplyLeading: false,
         title: Text('Your Orders'),
-        actions: [
-          //! profile
-        ],
+        actions: [],
       );
 
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.only(top: 8),
       children: [for (var i = 0; i < 15; i++) OrderTile()],
     );
   }
