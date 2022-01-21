@@ -7,7 +7,7 @@ import 'package:mywaiter_design/pages/home_tabs/search_tab.dart';
 mixin HomeTab on Widget {
   String get label;
   Widget get icon;
-  Widget get selectedIcon;
+  Widget get activeIcon;
   PreferredSizeWidget? get appBar => null;
 }
 
@@ -44,13 +44,14 @@ class _HomePageState extends State<HomePage> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedItemColor: theme.colorScheme.onBackground,
-        unselectedItemColor: theme.colorScheme.onBackground,
-        items: tabs
-            .mapI((tab, i) => BottomNavigationBarItem(
-                  icon: i == tabIndex ? tab.selectedIcon : tab.icon,
-                  label: tab.label,
-                ))
-            .toList(),
+        unselectedItemColor: theme.colorScheme.onSurface,
+        items: tabs.mapI((tab, i) {
+          return BottomNavigationBarItem(
+            icon: tab.icon,
+            activeIcon: tab.activeIcon,
+            label: tab.label,
+          );
+        }).toList(),
       ),
     );
   }
