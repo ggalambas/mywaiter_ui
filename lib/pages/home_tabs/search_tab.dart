@@ -31,10 +31,10 @@ class _SearchTabState extends State<SearchTab> {
     return Stack(
       children: [
         SingleChildScrollView(
-          padding: EdgeInsets.only(top: 8 + 56 + 8),
+          padding: EdgeInsets.only(top: 8 + 48 + 8),
           child: Column(
             children: [
-              for (var i = 0; i < 30; i++) RestaurantTile(),
+              for (var i = 0; i < 15; i++) RestaurantTile(),
             ],
           ),
         ),
@@ -47,6 +47,8 @@ class _SearchTabState extends State<SearchTab> {
             textInputAction: TextInputAction.search,
             decoration: InputDecoration(
               hintText: 'Search',
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               prefixIcon: Icon(LucideIcons.search),
               suffixIcon: controller.text.isEmpty
                   ? null
