@@ -72,21 +72,23 @@ class RestaurantTile extends StatelessWidget {
           '150/FFD800/FFFFFF/?text=${name.substring(0, 2)}',
       title: name,
       onTap: () => Navigator.pushNamed(context, RestaurantPage.route),
-      subtitle: Text.rich(TextSpan(
-        style: theme.textTheme.caption,
-        children: [
-          opened
-              ? TextSpan(
-                  text: 'Opened',
-                  style: TextStyle(color: Palette.green),
-                )
-              : TextSpan(
-                  text: 'Closed',
-                  style: TextStyle(color: Palette.red),
-                ),
-          TextSpan(text: ' ∙ Closes at 23pm'),
-        ],
-      )),
+      subtitle: Text.rich(
+        TextSpan(
+          style: theme.textTheme.caption,
+          children: [
+            opened
+                ? TextSpan(
+                    text: 'Opened',
+                    style: TextStyle(color: Palette.green),
+                  )
+                : TextSpan(
+                    text: 'Closed',
+                    style: TextStyle(color: Palette.red),
+                  ),
+            TextSpan(text: ' ∙ Closes at 23pm'),
+          ],
+        ),
+      ),
     );
   }
 }
