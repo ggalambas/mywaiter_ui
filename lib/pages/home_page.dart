@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mywaiter_design/config/extensions.dart';
 import 'package:mywaiter_design/pages/home_tabs/feed_tab.dart';
 import 'package:mywaiter_design/pages/home_tabs/orders_tab.dart';
 import 'package:mywaiter_design/pages/home_tabs/search_tab.dart';
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: theme.colorScheme.onBackground,
         unselectedItemColor: theme.colorScheme.onSurface,
         items: tabs
-            .map((tab) => BottomNavigationBarItem(
+            .mapI((tab, i) => BottomNavigationBarItem(
                   icon: Icon(tab.icon),
                   label: tab.label,
                 ))
