@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart' as svg_provider;
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
 import 'package:mywaiter_design/widgets/suffix_icon.dart';
+import 'package:mywaiter_design/widgets/svg_icon.dart';
 
 class SearchTab extends StatefulWidget with HomeTab {
   @override
   final String label = 'Search';
   @override
-  final Widget icon = SvgPicture.asset(
-    'assets/search.svg',
-    height: 24,
-  );
+  final Widget icon = SvgIcon('assets/search.svg');
   @override
-  final Widget selectedIcon = SvgPicture.asset(
-    'assets/search_filled.svg',
-    height: 24,
-  );
-
+  final Widget activeIcon = SvgIcon('assets/search_filled.svg');
   @override
   State<SearchTab> createState() => _SearchTabState();
 }
@@ -80,7 +73,7 @@ class RestaurantTile extends StatelessWidget {
                 'https://via.placeholder.com/'
                 '150/FFD800/FFFFFF/?text=${name.substring(0, 2)}',
               ),
-              backgroundImage: svg_provider.Svg('assets/logo.svg'),
+              backgroundImage: Svg('assets/logo.svg'),
               backgroundColor: theme.colorScheme.surface,
             ),
             SizedBox(width: 12),
