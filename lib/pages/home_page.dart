@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: tabs[tabIndex].appBar,
       body: SafeArea(
@@ -40,6 +41,8 @@ class _HomePageState extends State<HomePage> {
         onTap: (index) => setState(() => tabIndex = index),
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        selectedItemColor: theme.colorScheme.onBackground,
+        unselectedItemColor: theme.colorScheme.onSurface,
         items: tabs
             .map((tab) => BottomNavigationBarItem(
                   icon: Icon(tab.icon),
