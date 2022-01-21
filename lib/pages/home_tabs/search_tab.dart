@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart' as svg_provider;
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:mywaiter_design/config/constants.dart';
+import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
+import 'package:mywaiter_design/widgets/suffix_icon.dart';
 
 class SearchTab extends StatefulWidget with HomeTab {
   @override
@@ -24,7 +26,7 @@ class SearchTab extends StatefulWidget with HomeTab {
 }
 
 class _SearchTabState extends State<SearchTab> {
-  late final TextEditingController controller = TextEditingController()
+  late final controller = TextEditingController()
     ..addListener(() => setState(() {}));
 
   //* to do:
@@ -34,7 +36,6 @@ class _SearchTabState extends State<SearchTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //* search
         TextField(
           controller: controller,
           textInputAction: TextInputAction.search,
@@ -43,22 +44,19 @@ class _SearchTabState extends State<SearchTab> {
             prefixIcon: Icon(LucideIcons.search),
             suffixIcon: controller.text.isEmpty
                 ? null
-                : IconButton(
-                    iconSize: kSmallIconSize,
-                    tooltip: 'Clear',
-                    onPressed: () => controller.text = '',
-                    icon: Icon(LucideIcons.x),
+                : SuffixIcon(
+                    LucideIcons.x,
+                    onTap: () => controller.text = '',
                   ),
           ),
         ),
-        //* restaurants list
-        Column(
-          children: [
-            for (var i = 0; i < 5; i++) ...[
-              RestaurantTile(),
-              SizedBox(height: 16)
-            ]
-          ],
+        SizedBox(height: 8),
+        Expanded(
+          child: ListView(
+            children: [
+              for (var i = 0; i < 30; i++) RestaurantTile(),
+            ],
+          ),
         ),
       ],
     );
@@ -66,40 +64,48 @@ class _SearchTabState extends State<SearchTab> {
 }
 
 class RestaurantTile extends StatelessWidget {
-  final double height = 48;
   final String name = 'Fábrica Bolina';
-
-  // final String name = 'Bo';
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, RestaurantPage.route),
       child: SizedBox(
-        height: height,
+        height: 64,
         child: Row(
           children: [
             CircleAvatar(
-              // the restaurant image
+              radius: 24,
               foregroundImage: NetworkImage(
                 'https://via.placeholder.com/'
                 '150/FFD800/FFFFFF/?text=${name.substring(0, 2)}',
               ),
-              // a default image of the assets instead of color
-              // backgroundImage: ,
+              backgroundImage: svg_provider.Svg('assets/logo.svg'),
               backgroundColor: theme.colorScheme.surface,
-              radius: height / 2,
             ),
             SizedBox(width: 12),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name),
-                Text('Opened ∙ Closes at 23pm'),
+                Text(
+                  name,
+                  // style: ,
+                ),
+                Text.rich(
+                  TextSpan(
+                    // style: ,
+                    children: [
+                      TextSpan(
+                        text: 'Opened',
+                        style: TextStyle(color: Palette.green),
+                      ),
+                      TextSpan(text: ' ∙ Closes at 23pm'),
+                    ],
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {},
-                              )
+                              ),
                             ],
                           ),
                         ),
