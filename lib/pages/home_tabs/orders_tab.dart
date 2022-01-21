@@ -4,7 +4,9 @@ import 'package:mywaiter_design/pages/home_page.dart';
 
 class OrdersTab extends StatelessWidget with HomeTab {
   @override
-  final IconData icon = LucideIcons.clipboardList;
+  final Widget icon = Icon(LucideIcons.clipboardList);
+  @override
+  final Widget selectedIcon = Icon(LucideIcons.clipboardList);
   @override
   final String label = 'Orders';
 

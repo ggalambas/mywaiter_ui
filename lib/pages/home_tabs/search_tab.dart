@@ -5,7 +5,9 @@ import 'package:mywaiter_design/pages/restaurant_page.dart';
 
 class SearchTab extends StatefulWidget with HomeTab {
   @override
-  final IconData icon = LucideIcons.search;
+  final Widget icon = Icon(LucideIcons.search);
+  @override
+  final Widget selectedIcon = Icon(LucideIcons.search);
   @override
   final String label = 'Search';
 
