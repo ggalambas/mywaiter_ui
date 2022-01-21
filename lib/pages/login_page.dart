@@ -83,7 +83,10 @@ class LoginPage extends StatelessWidget {
                                 padding: EdgeInsets.zero,
                               ),
                               onPressed: () {},
-                              child: Text('G'),
+                              child: SvgPicture.asset(
+                                'assets/google.svg',
+                                height: 32,
+                              ),
                             ),
                             SizedBox(width: 12),
                             ElevatedButton(
@@ -94,7 +97,10 @@ class LoginPage extends StatelessWidget {
                                 padding: EdgeInsets.zero,
                               ),
                               onPressed: () {},
-                              child: Text('F'),
+                              child: SvgPicture.asset(
+                                'assets/facebook.svg',
+                                height: 32,
+                              ),
                             ),
                           ],
                         ),
