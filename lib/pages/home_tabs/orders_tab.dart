@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mywaiter_design/config/constants.dart';
+import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
+import 'package:mywaiter_design/widgets/item_tile.dart';
 import 'package:mywaiter_design/widgets/svg_icon.dart';
 
 class OrdersTab extends StatelessWidget with HomeTab {
@@ -24,64 +27,50 @@ class OrdersTab extends StatelessWidget with HomeTab {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (var i = 0; i < 5; i++) ...[OrderTile(), SizedBox(height: 16)]
-      ],
+    return ListView(
+      children: [for (var i = 0; i < 15; i++) OrderTile()],
     );
   }
 }
 
 class OrderTile extends StatelessWidget {
-  final double height = 48;
   final String name = 'Fábrica Bolina';
   final String price = '€34,85';
-
-  // final String name = 'Bo';
+  final bool pending = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      height: height,
-      child: Row(
+    return ItemTile(
+      imageUrl: 'https://via.placeholder.com/'
+          '150/FFD800/FFFFFF/?text=${name.substring(0, 2)}',
+      title: name,
+      onTap: () {},
+      subtitle: Row(
         children: [
-          CircleAvatar(
-            // the restaurant image
-            foregroundImage: NetworkImage(
-              'https://via.placeholder.com/'
-              '150/FFD800/FFFFFF/?text=${name.substring(0, 2)}',
+          Text(price, style: theme.textTheme.caption),
+          SizedBox(width: 8),
+          if (pending)
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 6),
+              decoration: BoxDecoration(
+                color: Palette.red,
+                borderRadius: BorderRadius.circular(kBorderRadius),
+              ),
+              child: Text(
+                'Pending',
+                style: theme.textTheme.caption!.copyWith(color: Colors.white),
+              ),
             ),
-            // a default image of the assets instead of color
-            // backgroundImage: ,
-            backgroundColor: theme.colorScheme.surface,
-            radius: height / 2,
-          ),
-          SizedBox(width: 12),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(name),
-              Row(
-                children: [
-                  Text(price),
-                  SizedBox(width: 8),
-                  Text('Pending'),
-                ],
-              )
-            ],
-          ),
-          Spacer(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text('17/10'),
-              Text('15/34'),
-            ],
-          )
         ],
+      ),
+      trailing: Text.rich(
+        TextSpan(
+          text: '14/01\n',
+          style: theme.textTheme.caption,
+          children: [TextSpan(text: '16h20')],
+        ),
+        textAlign: TextAlign.end,
       ),
     );
   }

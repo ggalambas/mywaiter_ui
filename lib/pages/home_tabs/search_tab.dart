@@ -30,13 +30,9 @@ class _SearchTabState extends State<SearchTab> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SingleChildScrollView(
+        ListView(
           padding: EdgeInsets.only(top: 8 + 48 + 8),
-          child: Column(
-            children: [
-              for (var i = 0; i < 15; i++) RestaurantTile(),
-            ],
-          ),
+          children: [for (var i = 0; i < 15; i++) RestaurantTile()],
         ),
         Padding(
           padding: EdgeInsets.only(top: 8).add(
@@ -76,23 +72,21 @@ class RestaurantTile extends StatelessWidget {
           '150/FFD800/FFFFFF/?text=${name.substring(0, 2)}',
       title: name,
       onTap: () => Navigator.pushNamed(context, RestaurantPage.route),
-      subtitle: Text.rich(
-        TextSpan(
-          style: theme.textTheme.caption,
-          children: [
-            opened
-                ? TextSpan(
-                    text: 'Opened',
-                    style: TextStyle(color: Palette.green),
-                  )
-                : TextSpan(
-                    text: 'Closed',
-                    style: TextStyle(color: Palette.red),
-                  ),
-            TextSpan(text: ' ∙ Closes at 23pm'),
-          ],
-        ),
-      ),
+      subtitle: Text.rich(TextSpan(
+        style: theme.textTheme.caption,
+        children: [
+          opened
+              ? TextSpan(
+                  text: 'Opened',
+                  style: TextStyle(color: Palette.green),
+                )
+              : TextSpan(
+                  text: 'Closed',
+                  style: TextStyle(color: Palette.red),
+                ),
+          TextSpan(text: ' ∙ Closes at 23pm'),
+        ],
+      )),
     );
   }
 }
