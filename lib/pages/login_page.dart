@@ -10,10 +10,6 @@ class LoginPage extends StatelessWidget {
       MediaQuery.of(context).size.height -
       MediaQuery.of(context).padding.top /* -kToolbarHeight */;
 
-  //* to do:
-  //* facebook / google
-  //* clean
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -75,33 +71,9 @@ class LoginPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size.square(56),
-                                primary: Colors.white,
-                                onPrimary: Colors.redAccent,
-                                padding: EdgeInsets.zero,
-                              ),
-                              onPressed: () {},
-                              child: SvgPicture.asset(
-                                'assets/google.svg',
-                                height: 32,
-                              ),
-                            ),
+                            _SocialButton('assets/google.svg'),
                             SizedBox(width: 12),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size.square(56),
-                                primary: Colors.white,
-                                onPrimary: Colors.blueAccent,
-                                padding: EdgeInsets.zero,
-                              ),
-                              onPressed: () {},
-                              child: SvgPicture.asset(
-                                'assets/facebook.svg',
-                                height: 32,
-                              ),
-                            ),
+                            _SocialButton('assets/facebook.svg'),
                           ],
                         ),
                         SizedBox(height: 24),
@@ -130,6 +102,25 @@ class LoginPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _SocialButton extends StatelessWidget {
+  final String assetName;
+  const _SocialButton(this.assetName);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size.square(56),
+        primary: Colors.white,
+        onPrimary: Colors.redAccent,
+        padding: EdgeInsets.zero,
+      ),
+      onPressed: () {},
+      child: SvgPicture.asset(assetName, height: 24),
     );
   }
 }

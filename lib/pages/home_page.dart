@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mywaiter_design/config/extensions.dart';
 import 'package:mywaiter_design/pages/home_tabs/feed_tab.dart';
 import 'package:mywaiter_design/pages/home_tabs/orders_tab.dart';
 import 'package:mywaiter_design/pages/home_tabs/search_tab.dart';
 
 mixin HomeTab on Widget {
+  String get label;
   Widget get icon;
   Widget get selectedIcon;
-  String get label;
   PreferredSizeWidget? get appBar => null;
 }
 
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: tabs[tabIndex].appBar,
       body: SafeArea(
@@ -41,9 +43,11 @@ class _HomePageState extends State<HomePage> {
         onTap: (index) => setState(() => tabIndex = index),
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        selectedItemColor: theme.colorScheme.onBackground,
+        unselectedItemColor: theme.colorScheme.onBackground,
         items: tabs
-            .map((tab) => BottomNavigationBarItem(
-                  icon: tab.icon,
+            .mapI((tab, i) => BottomNavigationBarItem(
+                  icon: i == tabIndex ? tab.selectedIcon : tab.icon,
                   label: tab.label,
                 ))
             .toList(),

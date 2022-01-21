@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
 
 class SearchTab extends StatefulWidget with HomeTab {
   @override
-  final Widget icon = Icon(LucideIcons.search);
-  @override
-  final Widget selectedIcon = Icon(LucideIcons.search);
-  @override
   final String label = 'Search';
+  @override
+  final Widget icon = SvgPicture.asset(
+    'assets/search.svg',
+    height: 24,
+  );
+  @override
+  final Widget selectedIcon = SvgPicture.asset(
+    'assets/search_filled.svg',
+    height: 24,
+  );
 
   @override
   State<SearchTab> createState() => _SearchTabState();
