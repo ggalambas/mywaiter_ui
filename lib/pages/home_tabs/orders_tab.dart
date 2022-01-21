@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 
 class OrdersTab extends StatelessWidget with HomeTab {
   @override
-  final IconData icon = LucideIcons.clipboardList;
-  @override
   final String label = 'Orders';
+  @override
+  final Widget icon = SvgPicture.asset(
+    'assets/clipboard_list.svg',
+    height: 24,
+  );
+  @override
+  final Widget selectedIcon = SvgPicture.asset(
+    'assets/clipboard_list_filled.svg',
+    height: 24,
+  );
 
   //* to do:
   //* profile button and page
