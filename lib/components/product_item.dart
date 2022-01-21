@@ -8,7 +8,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final item;
+    late final Widget item;
     switch (view) {
       case View.list:
         item = buildTile(context);
