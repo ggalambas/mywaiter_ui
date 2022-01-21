@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mywaiter_design/config/constants.dart';
+import 'package:mywaiter_design/config/theme/theme_config.dart';
 
 ThemeData theme(ColorScheme colorScheme) => ThemeData(
       colorScheme: colorScheme,
@@ -43,7 +44,12 @@ ElevatedButtonThemeData _elevatedButtonTheme() => ElevatedButtonThemeData(
       ),
     );
 
-AppBarTheme _appBarTheme(ColorScheme colorScheme) => AppBarTheme(elevation: 0);
+AppBarTheme _appBarTheme(ColorScheme colorScheme) => AppBarTheme(
+      systemOverlayStyle: ThemeConfig.systemOverlayStyle,
+      elevation: 0,
+      backgroundColor: colorScheme.background,
+      foregroundColor: colorScheme.onBackground,
+    );
 
 ScrollbarThemeData _scrollbarTheme() => ScrollbarThemeData(
     // thumbColor: MaterialStateColor.resolveWith((states) {
@@ -61,8 +67,7 @@ TextTheme _textTheme(ColorScheme colorScheme) => GoogleFonts.poppinsTextTheme(
           fontSize: 14,
         ),
         bodyText1: TextStyle(
-          color: Colors.green, //!
-          // color: colorScheme.onBackground,
+          color: colorScheme.onBackground,
           fontSize: 16,
         ),
         bodyText2: TextStyle(

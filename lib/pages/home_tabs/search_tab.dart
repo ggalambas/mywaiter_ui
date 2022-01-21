@@ -19,13 +19,15 @@ class SearchTab extends StatefulWidget with HomeTab {
   State<SearchTab> createState() => _SearchTabState();
 }
 
+//* to do
+//* placeholder image
+
 class _SearchTabState extends State<SearchTab> {
   late final controller = TextEditingController()
     ..addListener(() => setState(() {}));
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Stack(
       children: [
         SingleChildScrollView(
@@ -62,6 +64,7 @@ class _SearchTabState extends State<SearchTab> {
 
 class RestaurantTile extends StatelessWidget {
   final String name = 'Fábrica Bolina';
+  final bool opened = true;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -88,18 +91,20 @@ class RestaurantTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  // style: ,
-                ),
+                Text(name, style: theme.textTheme.bodyText1),
                 Text.rich(
                   TextSpan(
-                    // style: ,
+                    style: theme.textTheme.caption,
                     children: [
-                      TextSpan(
-                        text: 'Opened',
-                        style: TextStyle(color: Palette.green),
-                      ),
+                      opened
+                          ? TextSpan(
+                              text: 'Opened',
+                              style: TextStyle(color: Palette.green),
+                            )
+                          : TextSpan(
+                              text: 'Closed',
+                              style: TextStyle(color: Palette.red),
+                            ),
                       TextSpan(text: ' ∙ Closes at 23pm'),
                     ],
                   ),
