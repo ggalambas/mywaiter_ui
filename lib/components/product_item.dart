@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
+import 'package:mywaiter_design/widgets/price.dart';
 
 class ProductItem extends StatelessWidget {
   final View view;
   const ProductItem({required this.view});
+
+  final productTitle = 'Whiskey The Balvenie';
+  final productPrice = '€6,90';
 
   @override
   Widget build(BuildContext context) {
@@ -25,64 +31,106 @@ class ProductItem extends StatelessWidget {
 
   Widget buildCard(BuildContext context) {
     return Container(
-      width: 162,
-      padding: EdgeInsets.all(8),
+      width: 156,
+      margin: EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          image(height: 156),
-          title(),
+          image(context, height: 156),
+          SizedBox(height: 10),
+          Text(
+            productTitle + '\n',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(height: 3),
           Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              price(),
-              Spacer(),
-              addButton(),
+              Padding(
+                padding: EdgeInsets.only(bottom: 2),
+                child: price(context),
+              ),
+              addButton(context),
             ],
-          )
+          ),
         ],
       ),
     );
   }
 
   Widget buildTile(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 48,
+      margin: EdgeInsets.all(8),
       child: Row(
         children: [
-          image(width: 59),
+          image(context, width: 59, borderRadius: 8),
+          SizedBox(width: 10),
           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              title(),
-              price(),
+              Text(
+                productTitle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 4),
+              price(context),
             ],
-            // add
           ),
           Spacer(),
-          addButton(),
+          addButton(context),
         ],
       ),
     );
   }
 
-  Widget image({double? height, double? width}) {
+  Widget image(
+    BuildContext context, {
+    double? width,
+    double? height,
+    double borderRadius = kBorderRadius,
+  }) {
+    final theme = Theme.of(context);
     return Container(
-      color: Colors.greenAccent,
-      height: height,
       width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(borderRadius),
+        image: DecorationImage(
+          image: Svg(
+            'assets/logo.svg',
+            color: theme.colorScheme.onSurface,
+          ),
+        ),
+      ),
     );
   }
 
-  Widget title() {
-    return Text('Whiskey The Balvenie');
+  Widget price(BuildContext context) {
+    final theme = Theme.of(context);
+    return Price(
+      productPrice,
+      style: theme.textTheme.bodyText1!
+          .copyWith(color: theme.colorScheme.onSurface),
+    );
   }
 
-  Widget price() {
-    return Text('€6,90');
-  }
-
-  Widget addButton() {
-    return IconButton(onPressed: () {}, icon: Icon(LucideIcons.plus));
+  Widget addButton(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      width: 45,
+      height: 30,
+      decoration: BoxDecoration(
+        border: Border.all(color: theme.primaryColor),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      alignment: Alignment.center,
+      child: Icon(LucideIcons.plus, size: kSmallIconSize),
+    );
   }
 }

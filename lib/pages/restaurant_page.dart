@@ -83,7 +83,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
             ),
             SliverToBoxAdapter(
               child: InkWell(
-                onTap: () {}, //! navigate to info
+                onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: kScreenPadding,
@@ -147,10 +147,13 @@ class _RestaurantPageState extends State<RestaurantPage> {
                     //* filter items by category
                     children: [
                       ...categories.map(
-                        (_) => Wrap(
-                          children: [
-                            for (var i = 0; i < 5; i++) ProductItem(view: view)
-                          ],
+                        (_) => SingleChildScrollView(
+                          child: Wrap(
+                            children: [
+                              for (var i = 0; i < 15; i++)
+                                ProductItem(view: view)
+                            ],
+                          ),
                         ),
                       ),
                     ],
