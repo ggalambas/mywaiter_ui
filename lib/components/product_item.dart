@@ -9,24 +9,17 @@ class ProductItem extends StatelessWidget {
   final View view;
   const ProductItem({required this.view});
 
-  final productTitle = 'Whiskey The Balvenie';
-  final productPrice = '€6,90';
+  final productTitle = 'Whiskey The Balvenie 12 Years';
+  final productPrice = '6,90';
 
   @override
   Widget build(BuildContext context) {
-    late final Widget item;
     switch (view) {
       case View.list:
-        item = buildTile(context);
-        break;
+        return buildTile(context);
       case View.grid:
-        item = buildCard(context);
-        break;
+        return buildCard(context);
     }
-    return InkWell(
-      onTap: () {},
-      child: item,
-    );
   }
 
   Widget buildCard(BuildContext context) {
@@ -68,20 +61,21 @@ class ProductItem extends StatelessWidget {
         children: [
           image(context, width: 59, borderRadius: 8),
           SizedBox(width: 10),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                productTitle,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(height: 4),
-              price(context),
-            ],
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  productTitle,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 4),
+                price(context),
+              ],
+            ),
           ),
-          Spacer(),
+          SizedBox(width: 3),
           addButton(context),
         ],
       ),
@@ -95,16 +89,19 @@ class ProductItem extends StatelessWidget {
     double borderRadius = kBorderRadius,
   }) {
     final theme = Theme.of(context);
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: Material(
         color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(borderRadius),
-        image: DecorationImage(
-          image: Svg(
-            'assets/logo.svg',
-            color: theme.colorScheme.onSurface,
+        child: InkWell(
+          onTap: () {},
+          child: Ink.image(
+            width: width,
+            height: height,
+            image: Svg(
+              'assets/logo.svg',
+              color: theme.colorScheme.onSurface,
+            ),
           ),
         ),
       ),
@@ -122,15 +119,24 @@ class ProductItem extends StatelessWidget {
 
   Widget addButton(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      width: 45,
-      height: 30,
-      decoration: BoxDecoration(
-        border: Border.all(color: theme.primaryColor),
-        borderRadius: BorderRadius.circular(15),
+    final borderRadius = BorderRadius.circular(15);
+    return InkWell(
+      onTap: () {},
+      borderRadius: borderRadius,
+      child: Container(
+        width: 45,
+        height: 30,
+        decoration: BoxDecoration(
+          border: Border.all(color: theme.primaryColor),
+          borderRadius: borderRadius,
+        ),
+        alignment: Alignment.center,
+        child: Icon(
+          LucideIcons.plus,
+          size: kSmallIconSize,
+          color: theme.primaryColor,
+        ),
       ),
-      alignment: Alignment.center,
-      child: Icon(LucideIcons.plus, size: kSmallIconSize),
     );
   }
 }

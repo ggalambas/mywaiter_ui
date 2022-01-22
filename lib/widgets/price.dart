@@ -17,7 +17,7 @@ class Price extends StatelessWidget {
           WidgetSpan(
             alignment: PlaceholderAlignment.top,
             child: Padding(
-              padding: EdgeInsets.only(top: 2),
+              padding: EdgeInsets.only(top: 1),
               child: Text(
                 '€',
                 style: style.copyWith(
