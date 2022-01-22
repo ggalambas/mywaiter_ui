@@ -3,6 +3,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/components/product_item.dart';
 import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
+import 'package:mywaiter_design/config/theme/theme_config.dart';
 import 'package:mywaiter_design/widgets/flexible_space_title.dart';
 import 'package:mywaiter_design/widgets/persistent_tab_bar.dart';
 
@@ -63,6 +64,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
           headerSliverBuilder: (context, _) {
             return [
               SliverAppBar(
+                //? not using the appBarTheme for some reason
+                systemOverlayStyle: ThemeConfig.systemOverlayStyle,
                 pinned: true,
                 expandedHeight: kToolbarHeight + 12 + 30 + 8,
                 flexibleSpace: FlexibleSpaceTitle('Bolina'),
