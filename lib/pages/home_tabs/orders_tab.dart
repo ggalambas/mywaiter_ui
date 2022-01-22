@@ -10,7 +10,7 @@ class OrdersTab extends StatelessWidget with HomeTab {
   @override
   final Widget activeIcon = SvgIcon('assets/clipboard_list_filled.svg');
 
-  //* to do:
+  //TODO:
   //* profile
   //* orders
 

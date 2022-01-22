@@ -19,7 +19,7 @@ class SearchTab extends StatefulWidget with HomeTab {
   State<SearchTab> createState() => _SearchTabState();
 }
 
-//* to do
+//TODO:
 //* placeholder image
 
 class _SearchTabState extends State<SearchTab> {
