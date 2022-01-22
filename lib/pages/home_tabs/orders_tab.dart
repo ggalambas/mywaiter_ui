@@ -68,13 +68,14 @@ class OrderTile extends StatelessWidget {
             ),
         ],
       ),
-      trailing: Text.rich(
-        TextSpan(
-          text: '14/01\n',
-          style: theme.textTheme.caption,
-          children: [TextSpan(text: '16h20')],
-        ),
-        textAlign: TextAlign.end,
+      trailing: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text('14/01', style: theme.textTheme.caption),
+          SizedBox(height: 4),
+          Text('16h20', style: theme.textTheme.caption),
+        ],
       ),
     );
   }

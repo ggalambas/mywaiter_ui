@@ -42,7 +42,10 @@ class ItemTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: theme.textTheme.bodyText1),
-                if (subtitle != null) subtitle!,
+                if (subtitle != null) ...[
+                  SizedBox(height: 4),
+                  subtitle!,
+                ],
               ],
             ),
             Spacer(),

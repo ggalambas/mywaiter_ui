@@ -10,6 +10,7 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
       errorColor: colorScheme.error,
       scaffoldBackgroundColor: colorScheme.background,
       canvasColor: colorScheme.background,
+      primaryTextTheme: _textTheme(colorScheme),
       textTheme: _textTheme(colorScheme),
       appBarTheme: _appBarTheme(colorScheme),
       scrollbarTheme: _scrollbarTheme(),
@@ -61,25 +62,34 @@ ScrollbarThemeData _scrollbarTheme() => ScrollbarThemeData(
 
 TextTheme _textTheme(ColorScheme colorScheme) => GoogleFonts.poppinsTextTheme(
       TextTheme(
-        // color: Colors.green,
+        headline6: TextStyle(
+          color: colorScheme.onBackground,
+          fontSize: 20,
+          height: 1,
+        ),
         subtitle1: TextStyle(
           color: colorScheme.onBackground,
           fontSize: 14,
+          height: 1,
         ),
         bodyText1: TextStyle(
           color: colorScheme.onBackground,
           fontSize: 16,
+          height: 1,
         ),
         bodyText2: TextStyle(
           color: colorScheme.onBackground,
           fontSize: 14,
+          height: 1,
         ),
         caption: TextStyle(
           color: colorScheme.onSurface,
           fontSize: 12,
+          height: 1,
         ),
         button: TextStyle(
           fontSize: 14,
+          height: 1,
           fontWeight: FontWeight.w500,
         ),
       ),
