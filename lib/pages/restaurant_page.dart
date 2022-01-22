@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:mywaiter_design/components/product_item.dart';
 import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/widgets/flexible_space_title.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 enum View { grid, list }
 
@@ -45,6 +47,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
     'Drinks',
     'Dessert',
   ];
+
+  double screenHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height -
+      MediaQuery.of(context).padding.top -
+      kToolbarHeight -
+      kTextTabBarHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -121,27 +129,34 @@ class _RestaurantPageState extends State<RestaurantPage> {
             SliverStickyHeader(
               header: TabBar(
                 isScrollable: true,
-                indicatorColor: theme.primaryColor,
+                padding: EdgeInsets.symmetric(horizontal: kScreenPadding),
+                indicatorPadding: EdgeInsets.only(top: 16),
+                indicator: DotIndicator(
+                  radius: 4,
+                  color: theme.colorScheme.onBackground,
+                ),
+                labelColor: theme.colorScheme.onBackground,
+                unselectedLabelColor: theme.colorScheme.onSurface,
                 tabs: [...categories.map((category) => Tab(text: category))],
               ),
               sliver: SliverToBoxAdapter(
-                  // child: TabBarView(
-                  //   //* filter items by category
-                  //   children: [
-                  //     ...categories.map(
-                  //       (_) => Wrap(
-                  //         spacing: 8,
-                  //         children: [
-                  //           for (var i = 0; i < 5; i++) ...[
-                  //             ProductItem(view: view),
-                  //             SizedBox(height: 16)
-                  //           ]
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
+                child: Container(
+                  height: screenHeight(context),
+                  padding: EdgeInsets.all(8),
+                  child: TabBarView(
+                    //* filter items by category
+                    children: [
+                      ...categories.map(
+                        (_) => Wrap(
+                          children: [
+                            for (var i = 0; i < 5; i++) ProductItem(view: view)
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                ),
+              ),
             ),
           ],
         ),

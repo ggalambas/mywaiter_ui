@@ -24,12 +24,13 @@ class ProductItem extends StatelessWidget {
   }
 
   Widget buildCard(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 162,
+      padding: EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          image(height: 130),
+          image(height: 156),
           title(),
           Row(
             mainAxisSize: MainAxisSize.min,
