@@ -30,9 +30,10 @@ class _SearchTabState extends State<SearchTab> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ListView(
+        ListView.builder(
           padding: EdgeInsets.only(top: 8 + 48 + 8),
-          children: [for (var i = 0; i < 15; i++) RestaurantTile()],
+          itemCount: 15,
+          itemBuilder: (context, i) => RestaurantTile(),
         ),
         Padding(
           padding: EdgeInsets.only(top: 8).add(
