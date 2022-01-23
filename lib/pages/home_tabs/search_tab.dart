@@ -23,14 +23,19 @@ class SearchTab extends StatefulWidget with HomeTab {
 //* placeholder image
 
 class _SearchTabState extends State<SearchTab> {
-  late final controller = TextEditingController()
+  late final scrollController = ScrollController()
     ..addListener(() => setState(() {}));
+  late final textController = TextEditingController()
+    ..addListener(() => setState(() {}));
+
+  bool get isScrolled => scrollController.offset > 0;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         ListView.builder(
+          controller: scrollController,
           padding: EdgeInsets.only(top: 8 + 48 + 8),
           itemCount: 15,
           itemBuilder: (context, i) => RestaurantTile(),
@@ -39,20 +44,24 @@ class _SearchTabState extends State<SearchTab> {
           padding: EdgeInsets.only(top: 8).add(
             EdgeInsets.symmetric(horizontal: kScreenPadding),
           ),
-          child: TextField(
-            controller: controller,
-            textInputAction: TextInputAction.search,
-            decoration: InputDecoration(
-              hintText: 'Search',
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              prefixIcon: Icon(LucideIcons.search),
-              suffixIcon: controller.text.isEmpty
-                  ? null
-                  : SuffixIcon(
-                      LucideIcons.x,
-                      onTap: () => controller.text = '',
-                    ),
+          child: Material(
+            elevation: isScrolled ? 4 : 0,
+            borderRadius: BorderRadius.circular(kBorderRadius),
+            child: TextField(
+              controller: textController,
+              textInputAction: TextInputAction.search,
+              decoration: InputDecoration(
+                hintText: 'Search',
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                prefixIcon: Icon(LucideIcons.search),
+                suffixIcon: textController.text.isEmpty
+                    ? null
+                    : SuffixIcon(
+                        LucideIcons.x,
+                        onTap: () => textController.text = '',
+                      ),
+              ),
             ),
           ),
         ),
