@@ -22,14 +22,14 @@ class _ProductPageState extends State<ProductPage> {
   var quantity = 0;
   void changeQuantity(int increment) => setState(() => quantity += increment);
 
-  double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+  double screenWidth() => MediaQuery.of(context).size.width;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     const aspectRatio = 5 / 4;
     return SheetScaffold(
-      backgroundHeight: screenWidth(context) / aspectRatio,
+      backgroundHeight: screenWidth() / aspectRatio,
       background: AspectRatio(
         aspectRatio: aspectRatio,
         child: Image(
