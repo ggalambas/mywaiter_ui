@@ -94,7 +94,7 @@ class ProductItem extends StatelessWidget {
       child: Material(
         color: theme.colorScheme.surface,
         child: InkWell(
-          onTap: () {},
+          onTap: () => Navigator.pushNamed(context, ProductPage.route),
           child: AspectRatio(
             aspectRatio: aspectRatio,
             child: Ink.image(
@@ -122,7 +122,7 @@ class ProductItem extends StatelessWidget {
     final theme = Theme.of(context);
     final borderRadius = BorderRadius.circular(15);
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, ProductPage.route),
+      onTap: () {},
       borderRadius: borderRadius,
       child: Container(
         width: 45,
