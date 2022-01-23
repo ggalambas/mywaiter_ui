@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mywaiter_design/config/theme/theme_config.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
+import 'package:mywaiter_design/pages/info_page.dart';
 import 'package:mywaiter_design/pages/login_page.dart';
 import 'package:mywaiter_design/pages/product_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
@@ -51,6 +52,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         HomePage.route: (_) => HomePage(),
         RestaurantPage.route: (_) => RestaurantPage(),
         ProductPage.route: (_) => ProductPage(),
+        InfoPage.route: (_) => InfoPage(),
       },
       home: LoginPage(),
     );

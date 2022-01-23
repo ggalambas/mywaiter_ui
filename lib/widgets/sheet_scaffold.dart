@@ -4,12 +4,12 @@ import 'package:mywaiter_design/config/constants.dart';
 
 class SheetScaffold extends StatelessWidget {
   final double? backgroundHeight;
-  final Widget background;
+  final Widget? background;
   final Widget body;
 
   const SheetScaffold({
     this.backgroundHeight,
-    required this.background,
+    this.background,
     required this.body,
   });
 
@@ -21,7 +21,7 @@ class SheetScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final minHeight = backgroundHeight == null
-        ? 0.0
+        ? 0.4
         : (screenHeight(context) - backgroundHeight! + borderRadius) /
             (screenHeight(context) - kToolbarHeight);
     return Scaffold(
@@ -42,7 +42,7 @@ class SheetScaffold extends StatelessWidget {
         padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child: Stack(
           children: [
-            background, //? parallax
+            if (background != null) background!, //? parallax
             Padding(
               padding: EdgeInsets.only(top: kToolbarHeight),
               child: FlexibleBottomSheet(

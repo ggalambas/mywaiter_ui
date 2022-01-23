@@ -4,6 +4,7 @@ import 'package:mywaiter_design/components/product_item.dart';
 import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/config/theme/theme_config.dart';
+import 'package:mywaiter_design/pages/info_page.dart';
 import 'package:mywaiter_design/widgets/flexible_space_title.dart';
 import 'package:mywaiter_design/widgets/persistent_tab_bar.dart';
 
@@ -85,7 +86,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
               ),
               SliverToBoxAdapter(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, InfoPage.route),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: kScreenPadding,
