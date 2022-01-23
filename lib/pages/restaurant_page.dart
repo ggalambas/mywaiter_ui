@@ -49,12 +49,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
     'Dessert',
   ];
 
-  double screenHeight(BuildContext context) =>
-      MediaQuery.of(context).size.height -
-      MediaQuery.of(context).padding.top -
-      kToolbarHeight -
-      kTextTabBarHeight;
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -140,7 +134,10 @@ class _RestaurantPageState extends State<RestaurantPage> {
             children: [
               ...categories.map(
                 (_) => SingleChildScrollView(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: view == View.grid ? 8 : 0,
+                  ),
                   child: Wrap(
                     children: [
                       for (var i = 0; i < 15; i++) ProductItem(view: view)

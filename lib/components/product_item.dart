@@ -30,7 +30,11 @@ class ProductItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          image(context, aspectRatio: 1),
+          image(
+            context,
+            aspectRatio: 1,
+            onTap: () => Navigator.pushNamed(context, ProductPage.route),
+          ),
           SizedBox(height: 10),
           Text(
             productTitle + '\n',
@@ -55,30 +59,33 @@ class ProductItem extends StatelessWidget {
   }
 
   Widget buildTile(BuildContext context) {
-    return Container(
-      height: 48,
-      margin: EdgeInsets.all(8),
-      child: Row(
-        children: [
-          image(context, aspectRatio: 5 / 4, borderRadius: 8),
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  productTitle,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 4),
-                price(context),
-              ],
+    return InkWell(
+      onTap: () => Navigator.pushNamed(context, ProductPage.route),
+      child: Container(
+        height: 48,
+        margin: EdgeInsets.symmetric(vertical: 8, horizontal: kScreenPadding),
+        child: Row(
+          children: [
+            image(context, aspectRatio: 5 / 4, borderRadius: 8),
+            SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    productTitle,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: 4),
+                  price(context),
+                ],
+              ),
             ),
-          ),
-          SizedBox(width: 4),
-          addButton(context),
-        ],
+            SizedBox(width: 4),
+            addButton(context),
+          ],
+        ),
       ),
     );
   }
@@ -87,6 +94,7 @@ class ProductItem extends StatelessWidget {
     BuildContext context, {
     required double aspectRatio,
     double borderRadius = kBorderRadius,
+    VoidCallback? onTap,
   }) {
     final theme = Theme.of(context);
     return ClipRRect(
@@ -94,7 +102,7 @@ class ProductItem extends StatelessWidget {
       child: Material(
         color: theme.colorScheme.surface,
         child: InkWell(
-          onTap: () => Navigator.pushNamed(context, ProductPage.route),
+          onTap: onTap,
           child: AspectRatio(
             aspectRatio: aspectRatio,
             child: Ink.image(
