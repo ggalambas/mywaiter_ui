@@ -64,7 +64,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
           headerSliverBuilder: (context, _) {
             return [
               SliverAppBar(
-                //? not using the appBarTheme for some reason
                 systemOverlayStyle: ThemeConfig.systemOverlayStyle,
                 pinned: true,
                 expandedHeight: kToolbarHeight + 12 + 30 + 8,

@@ -135,11 +135,13 @@ class _SocialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         minimumSize: Size.square(56),
-        primary: Colors.white,
-        onPrimary: Colors.redAccent,
+        primary: theme.brightness == Brightness.light
+            ? theme.backgroundColor
+            : theme.colorScheme.surface,
         padding: EdgeInsets.zero,
       ),
       onPressed: () {},

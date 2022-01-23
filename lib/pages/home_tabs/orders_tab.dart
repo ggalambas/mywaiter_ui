@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mywaiter_design/components/item_tile.dart';
 import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
+import 'package:mywaiter_design/config/theme/theme_config.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/widgets/price.dart';
 import 'package:mywaiter_design/widgets/svg_icon.dart';
@@ -20,6 +21,7 @@ class OrdersTab extends StatelessWidget with HomeTab {
 
   @override
   PreferredSizeWidget get appBar => AppBar(
+        systemOverlayStyle: ThemeConfig.systemOverlayStyle,
         automaticallyImplyLeading: false,
         title: Text('Your Orders'),
         actions: [
