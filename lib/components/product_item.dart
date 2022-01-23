@@ -30,14 +30,14 @@ class ProductItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          image(context, height: 156),
+          image(context, aspectRatio: 1),
           SizedBox(height: 10),
           Text(
             productTitle + '\n',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(height: 3),
+          SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -60,7 +60,7 @@ class ProductItem extends StatelessWidget {
       margin: EdgeInsets.all(8),
       child: Row(
         children: [
-          image(context, width: 59, borderRadius: 8),
+          image(context, aspectRatio: 5 / 4, borderRadius: 8),
           SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -76,7 +76,7 @@ class ProductItem extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 3),
+          SizedBox(width: 4),
           addButton(context),
         ],
       ),
@@ -85,8 +85,7 @@ class ProductItem extends StatelessWidget {
 
   Widget image(
     BuildContext context, {
-    double? width,
-    double? height,
+    required double aspectRatio,
     double borderRadius = kBorderRadius,
   }) {
     final theme = Theme.of(context);
@@ -96,12 +95,13 @@ class ProductItem extends StatelessWidget {
         color: theme.colorScheme.surface,
         child: InkWell(
           onTap: () {},
-          child: Ink.image(
-            width: width,
-            height: height,
-            image: Svg(
-              'assets/logo.svg',
-              color: theme.colorScheme.onSurface,
+          child: AspectRatio(
+            aspectRatio: aspectRatio,
+            child: Ink.image(
+              image: Svg(
+                'assets/logo.svg',
+                color: theme.colorScheme.onSurface,
+              ),
             ),
           ),
         ),
