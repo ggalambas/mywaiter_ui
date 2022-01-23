@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/config/constants.dart';
+import 'package:mywaiter_design/pages/product_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
 import 'package:mywaiter_design/widgets/price.dart';
 
@@ -121,7 +122,7 @@ class ProductItem extends StatelessWidget {
     final theme = Theme.of(context);
     final borderRadius = BorderRadius.circular(15);
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.pushNamed(context, ProductPage.route),
       borderRadius: borderRadius,
       child: Container(
         width: 45,

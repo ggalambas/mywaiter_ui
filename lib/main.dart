@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mywaiter_design/config/theme/theme_config.dart';
 import 'package:mywaiter_design/pages/home_page.dart';
 import 'package:mywaiter_design/pages/login_page.dart';
+import 'package:mywaiter_design/pages/product_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
 
 void main() {
@@ -49,6 +50,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         LoginPage.route: (_) => LoginPage(),
         HomePage.route: (_) => HomePage(),
         RestaurantPage.route: (_) => RestaurantPage(),
+        ProductPage.route: (_) => ProductPage(),
       },
       home: LoginPage(),
     );

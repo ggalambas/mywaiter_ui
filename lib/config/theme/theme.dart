@@ -62,6 +62,11 @@ ScrollbarThemeData _scrollbarTheme() => ScrollbarThemeData(
 
 TextTheme _textTheme(ColorScheme colorScheme) => GoogleFonts.poppinsTextTheme(
       TextTheme(
+        headline4: TextStyle(
+          color: colorScheme.onBackground,
+          fontSize: 34,
+          height: 1,
+        ),
         headline6: TextStyle(
           color: colorScheme.onBackground,
           fontSize: 20,
