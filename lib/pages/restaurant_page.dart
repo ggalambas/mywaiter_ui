@@ -66,7 +66,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
               SliverAppBar(
                 systemOverlayStyle: ThemeConfig.systemOverlayStyle,
                 pinned: true,
-                expandedHeight: kToolbarHeight + 12 + 30 + 8,
+                expandedHeight: kToolbarHeight + 12 + 20 * 1.5 * 1.2 + 8,
                 flexibleSpace: FlexibleSpaceTitle('Bolina'),
                 actions: [
                   IconButton(
