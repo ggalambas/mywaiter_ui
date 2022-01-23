@@ -65,12 +65,12 @@ TextTheme _textTheme(ColorScheme colorScheme) => GoogleFonts.poppinsTextTheme(
         headline4: TextStyle(
           color: colorScheme.onBackground,
           fontSize: 34,
-          height: 1,
+          height: 1.2,
         ),
         headline6: TextStyle(
           color: colorScheme.onBackground,
           fontSize: 20,
-          height: 1,
+          height: 1.2,
         ),
         subtitle1: TextStyle(
           color: colorScheme.onBackground,
