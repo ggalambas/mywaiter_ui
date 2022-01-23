@@ -28,7 +28,8 @@ class _SearchTabState extends State<SearchTab> {
   late final textController = TextEditingController()
     ..addListener(() => setState(() {}));
 
-  bool get isScrolled => scrollController.offset > 0;
+  bool get isScrolled =>
+      scrollController.hasClients && scrollController.offset > 0;
 
   @override
   Widget build(BuildContext context) {
