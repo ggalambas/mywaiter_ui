@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:after_layout/after_layout.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +10,13 @@ class SheetScaffold extends StatefulWidget {
   final double? minHeight;
   final Widget? background;
   final Widget body;
+  final Widget? trailing;
 
   const SheetScaffold({
     this.minHeight,
     this.background,
     required this.body,
+    this.trailing,
   });
 
   @override
@@ -22,15 +26,23 @@ class SheetScaffold extends StatefulWidget {
 class _SheetScaffoldState extends State<SheetScaffold>
     with AfterLayoutMixin<SheetScaffold> {
   final bodyKey = GlobalKey();
+  final trailingKey = GlobalKey();
   late var minHeight = (widget.minHeight ?? 0.0) + borderRadius;
   var maxHeight = double.infinity;
 
+  double screenHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height -
+      MediaQuery.of(context).padding.top -
+      kToolbarHeight;
+
   @override
   void afterFirstLayout(BuildContext context) {
+    final trailingHeight = trailingKey.currentContext?.size!.height ?? 0;
     final bodyHeight = bodyKey.currentContext!.size!.height;
+    final finalHeight = bodyHeight + trailingHeight;
     setState(() {
-      if (widget.minHeight == null) minHeight = bodyHeight;
-      maxHeight = bodyHeight;
+      if (widget.minHeight == null) minHeight = finalHeight;
+      maxHeight = max(minHeight, finalHeight);
     });
   }
 
@@ -47,7 +59,7 @@ class _SheetScaffoldState extends State<SheetScaffold>
           leading: Padding(
             padding: EdgeInsets.all(8),
             child: Material(
-              elevation: 4,
+              elevation: 2,
               shape: CircleBorder(),
               child: BackButton(),
             ),
@@ -66,7 +78,7 @@ class _SheetScaffoldState extends State<SheetScaffold>
                 minHeight: minHeight,
                 maxHeight: maxHeight,
                 builder: (context, controller) => Material(
-                  elevation: 4,
+                  elevation: 2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(borderRadius),
@@ -86,6 +98,15 @@ class _SheetScaffoldState extends State<SheetScaffold>
                 ),
               ),
             ),
+            if (widget.trailing != null)
+              Container(
+                alignment: Alignment.bottomCenter,
+                padding: EdgeInsets.all(kScreenPadding),
+                child: KeyedSubtree(
+                  key: trailingKey,
+                  child: widget.trailing!,
+                ),
+              ),
           ],
         ),
       ),
@@ -107,27 +128,21 @@ class _Sheet extends StatelessWidget {
     required this.builder,
   });
 
-  double screenHeight(BuildContext context) =>
-      MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
-
   @override
   Widget build(BuildContext context) {
-    final totalHeight = (screenHeight(context) - kToolbarHeight);
-    final minRelative = (minHeight / totalHeight).clamp(0.0, 1.0);
-    final maxRelative = (maxHeight / totalHeight).clamp(0.0, 1.0);
-    return minRelative < maxRelative
-        ? FlexibleBottomSheet(
-            key: ValueKey(minHeight),
-            minHeight: minRelative,
-            initHeight: minRelative,
-            maxHeight: maxRelative,
-            isCollapsible: false,
-            builder: (context, controller, _) => builder(context, controller),
-          )
-        : SizedBox(
-            key: ValueKey(minHeight),
-            height: minHeight,
-            child: builder(context, null),
-          );
+    final minRelative = (minHeight / maxHeight).clamp(0.0, 1.0);
+    return SizedBox(
+      key: ValueKey(maxHeight),
+      height: maxHeight,
+      child: minHeight < maxHeight
+          ? FlexibleBottomSheet(
+              minHeight: minRelative,
+              initHeight: minRelative,
+              maxHeight: 1,
+              isCollapsible: false,
+              builder: (context, controller, _) => builder(context, controller),
+            )
+          : builder(context, null),
+    );
   }
 }

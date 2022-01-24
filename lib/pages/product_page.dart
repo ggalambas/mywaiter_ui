@@ -41,6 +41,10 @@ class _ProductPageState extends State<ProductPage> {
           ),
         ),
       ),
+      trailing: ElevatedButton(
+        onPressed: () {},
+        child: Text('Add to cart'),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

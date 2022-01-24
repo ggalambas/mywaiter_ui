@@ -138,7 +138,7 @@ class _SocialButton extends StatelessWidget {
     final theme = Theme.of(context);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        minimumSize: Size.square(56),
+        minimumSize: Size.square(kButtonHeight),
         primary: theme.brightness == Brightness.light
             ? theme.backgroundColor
             : theme.colorScheme.surface,
