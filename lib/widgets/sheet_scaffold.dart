@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:after_layout/after_layout.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -27,26 +25,14 @@ class _SheetScaffoldState extends State<SheetScaffold>
     with AfterLayoutMixin<SheetScaffold> {
   final bodyKey = GlobalKey();
   final trailingKey = GlobalKey();
-  late var minHeight = (widget.minHeight ?? 0.0) + borderRadius;
-  var maxHeight = double.infinity;
-
-  double screenHeight(BuildContext context) =>
-      MediaQuery.of(context).size.height -
-      MediaQuery.of(context).padding.top -
-      kToolbarHeight;
+  var bodyHeight = 0.0;
+  var trailingHeight = 0.0;
 
   @override
-  void afterFirstLayout(BuildContext context) {
-    final trailingHeight = trailingKey.currentContext?.size!.height ?? 0;
-    final bodyHeight = bodyKey.currentContext!.size!.height;
-    final finalHeight = bodyHeight + trailingHeight;
-    setState(() {
-      if (widget.minHeight == null) minHeight = finalHeight;
-      maxHeight = max(minHeight, finalHeight);
-    });
-  }
-
-  double get borderRadius => 24;
+  void afterFirstLayout(BuildContext context) => setState(() {
+        trailingHeight = trailingKey.currentContext?.size!.height ?? 0.0;
+        bodyHeight = bodyKey.currentContext!.size!.height;
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -66,46 +52,47 @@ class _SheetScaffoldState extends State<SheetScaffold>
           ),
         ),
         extendBodyBehindAppBar: true,
-        backgroundColor: theme.colorScheme.surface,
+        backgroundColor: theme.colorScheme.surface, //! placeholder background
         body: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            // TODO parallax
-            if (widget.background != null) widget.background!,
-            Container(
+            if (widget.background != null)
+              Align(
+                alignment: Alignment.topCenter,
+                child: widget.background!,
+              ),
+            Padding(
               padding: EdgeInsets.only(top: kToolbarHeight),
-              alignment: Alignment.bottomCenter,
               child: _Sheet(
-                minHeight: minHeight,
-                maxHeight: maxHeight,
+                key: ValueKey(bodyHeight),
+                minHeight: widget.minHeight,
+                height: bodyHeight + trailingHeight,
                 builder: (context, controller) => Material(
+                  key: bodyKey,
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(borderRadius),
+                      top: Radius.circular(kSheetBorderRadius),
                     ),
                   ),
                   child: SingleChildScrollView(
                     controller: controller,
-                    child: Padding(
-                      key: bodyKey,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: kScreenPadding,
-                        vertical: borderRadius,
-                      ),
-                      child: widget.body,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: kScreenPadding)
+                        .add(EdgeInsets.only(
+                      top: kSheetBorderRadius,
+                      bottom: 8 + trailingHeight,
+                    )),
+                    child: widget.body,
                   ),
                 ),
               ),
             ),
             if (widget.trailing != null)
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.all(kScreenPadding),
-                child: KeyedSubtree(
-                  key: trailingKey,
-                  child: widget.trailing!,
-                ),
+              Padding(
+                key: trailingKey,
+                padding: EdgeInsets.symmetric(horizontal: kScreenPadding)
+                    .add(EdgeInsets.only(bottom: kScreenPadding)),
+                child: widget.trailing!,
               ),
           ],
         ),
@@ -115,34 +102,41 @@ class _SheetScaffoldState extends State<SheetScaffold>
 }
 
 class _Sheet extends StatelessWidget {
-  final double minHeight;
-  final double maxHeight;
+  final double? minHeight;
+  final double height;
   final Widget Function(
     BuildContext context,
-    FlexibleDraggableScrollableSheetScrollController? scrollController,
+    ScrollController? scrollController,
   ) builder;
 
   const _Sheet({
-    required this.minHeight,
-    required this.maxHeight,
+    Key? key,
+    this.minHeight,
+    required this.height,
     required this.builder,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final minRelative = (minHeight / maxHeight).clamp(0.0, 1.0);
+    if (height == 0) return builder(context, null);
+    if (minHeight != null && minHeight! < height)
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          final maxHeight = constraints.maxHeight;
+          final minRelative = (minHeight! / maxHeight).clamp(0.0, 1.0);
+          final maxRelative = (height / maxHeight).clamp(0.0, 1.0);
+          return FlexibleBottomSheet(
+            minHeight: minRelative,
+            initHeight: minRelative,
+            maxHeight: maxRelative,
+            isCollapsible: false,
+            builder: (context, controller, _) => builder(context, controller),
+          );
+        },
+      );
     return SizedBox(
-      key: ValueKey(maxHeight),
-      height: maxHeight,
-      child: minHeight < maxHeight
-          ? FlexibleBottomSheet(
-              minHeight: minRelative,
-              initHeight: minRelative,
-              maxHeight: 1,
-              isCollapsible: false,
-              builder: (context, controller, _) => builder(context, controller),
-            )
-          : builder(context, null),
+      height: minHeight,
+      child: builder(context, null),
     );
   }
 }

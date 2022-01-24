@@ -19,8 +19,10 @@ class _ProductPageState extends State<ProductPage> {
   final description =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo sodales dignissim. Etiam dapibus ut massa et pharetra. Praesent sit amet vehicula mauris, id congue nibh. Nullam consectetur pharetra velit, quis auctor magna interdum vitae. Proin enim lectus, eleifend ac neque a, dignissim blandit odio.';
 
-  var quantity = 0;
-  void changeQuantity(int increment) => setState(() => quantity += increment);
+  var quantity = 1;
+  void changeQuantity(int increment) => setState(() {
+        if (quantity + increment >= 1) quantity += increment;
+      });
 
   double get screenHeight =>
       MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -96,7 +98,7 @@ class _ProductPageState extends State<ProductPage> {
           Text(
             description,
             style: TextStyle(color: theme.colorScheme.onSurface),
-          )
+          ),
         ],
       ),
     );
