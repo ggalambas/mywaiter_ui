@@ -6,13 +6,13 @@ import 'package:mywaiter_design/config/theme/theme_config.dart';
 
 class SheetScaffold extends StatefulWidget {
   final double? minHeight;
-  final Widget? background;
+  final Widget background;
   final Widget body;
   final Widget? trailing;
 
   const SheetScaffold({
     this.minHeight,
-    this.background,
+    required this.background,
     required this.body,
     this.trailing,
   });
@@ -56,11 +56,10 @@ class _SheetScaffoldState extends State<SheetScaffold>
         body: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            if (widget.background != null)
-              Align(
-                alignment: Alignment.topCenter,
-                child: widget.background!,
-              ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: widget.background,
+            ),
             Padding(
               padding: EdgeInsets.only(top: kToolbarHeight),
               child: _Sheet(

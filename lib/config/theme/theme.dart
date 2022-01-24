@@ -17,6 +17,11 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
       scrollbarTheme: _scrollbarTheme(),
       inputDecorationTheme: _inputDecorationTheme(colorScheme),
       elevatedButtonTheme: _elevatedButtonTheme(),
+      iconTheme: _iconTheme(colorScheme),
+    );
+
+IconThemeData _iconTheme(ColorScheme colorScheme) => IconThemeData(
+      color: colorScheme.onBackground,
     );
 
 InputDecorationTheme _inputDecorationTheme(ColorScheme colorScheme) =>
