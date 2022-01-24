@@ -13,14 +13,11 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
       primaryTextTheme: _textTheme(colorScheme),
       textTheme: _textTheme(colorScheme),
       appBarTheme: _appBarTheme(colorScheme),
+      bottomNavigationBarTheme: _bottomNavigationBarTheme(colorScheme),
       scrollbarTheme: _scrollbarTheme(),
       inputDecorationTheme: _inputDecorationTheme(colorScheme),
-      bottomNavigationBarTheme: _bottomNavigationBarTheme(),
       elevatedButtonTheme: _elevatedButtonTheme(),
     );
-
-BottomNavigationBarThemeData _bottomNavigationBarTheme() =>
-    BottomNavigationBarThemeData(elevation: 0);
 
 InputDecorationTheme _inputDecorationTheme(ColorScheme colorScheme) =>
     InputDecorationTheme(
@@ -50,6 +47,17 @@ AppBarTheme _appBarTheme(ColorScheme colorScheme) => AppBarTheme(
       elevation: 0,
       backgroundColor: colorScheme.background,
       foregroundColor: colorScheme.onBackground,
+    );
+
+BottomNavigationBarThemeData _bottomNavigationBarTheme(
+        ColorScheme colorScheme) =>
+    BottomNavigationBarThemeData(
+      elevation: 0,
+      backgroundColor: colorScheme.background,
+      selectedItemColor: colorScheme.onBackground,
+      unselectedItemColor: colorScheme.onSurface,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
     );
 
 ScrollbarThemeData _scrollbarTheme() => ScrollbarThemeData(

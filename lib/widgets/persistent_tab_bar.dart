@@ -25,7 +25,7 @@ class PersistentTabBar extends SliverPersistentHeaderDelegate {
   ) {
     final theme = Theme.of(context);
     return Material(
-      elevation: overlapsContent ? 4 : 0,
+      // elevation: overlapsContent ? 4 : 0,
       color: theme.backgroundColor,
       child: TabBar(
         isScrollable: true,

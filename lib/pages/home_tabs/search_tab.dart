@@ -23,20 +23,20 @@ class SearchTab extends StatefulWidget with HomeTab {
 //* placeholder image
 
 class _SearchTabState extends State<SearchTab> {
-  late final scrollController = ScrollController()
-    ..addListener(() => setState(() {}));
+  // late final scrollController = ScrollController()
+  //   ..addListener(() => setState(() {}));
   late final textController = TextEditingController()
     ..addListener(() => setState(() {}));
 
-  bool get isScrolled =>
-      scrollController.hasClients && scrollController.offset > 0;
+  // bool get isScrolled =>
+  //     scrollController.hasClients && scrollController.offset > 0;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         ListView.builder(
-          controller: scrollController,
+          // controller: scrollController,
           padding: EdgeInsets.only(top: 8 + 48 + 8),
           itemCount: 15,
           itemBuilder: (context, i) => RestaurantTile(),
@@ -46,7 +46,7 @@ class _SearchTabState extends State<SearchTab> {
             EdgeInsets.symmetric(horizontal: kScreenPadding),
           ),
           child: Material(
-            elevation: isScrolled ? 4 : 0,
+            // elevation: isScrolled ? 4 : 0,
             borderRadius: BorderRadius.circular(kBorderRadius),
             child: TextField(
               controller: textController,

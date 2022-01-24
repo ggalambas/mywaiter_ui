@@ -35,10 +35,6 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: tabIndex,
         onTap: (index) => setState(() => tabIndex = index),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: theme.colorScheme.onBackground,
-        unselectedItemColor: theme.colorScheme.onSurface,
         items: tabs.map((tab) {
           return BottomNavigationBarItem(
             icon: tab.icon,
