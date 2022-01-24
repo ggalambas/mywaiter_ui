@@ -111,10 +111,11 @@ class _Sheet extends StatelessWidget {
 
   const _Sheet({
     Key? key,
-    this.minHeight,
+    double? minHeight,
     required this.height,
     required this.builder,
-  }) : super(key: key);
+  })  : minHeight = minHeight == null ? null : minHeight + kSheetBorderRadius,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
