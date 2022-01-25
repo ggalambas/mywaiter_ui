@@ -1,35 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/config/constants.dart';
-import 'package:mywaiter_design/config/extensions.dart';
 import 'package:mywaiter_design/widgets/sheet_scaffold.dart';
 
 class Schedule {
-  final String weekday;
+  final int _weekday;
   final TimeOfDay start;
   final TimeOfDay end;
-  Schedule(this.weekday, this.start, this.end);
+  const Schedule(this._weekday, this.start, this.end)
+      : assert(0 <= _weekday && _weekday <= 7);
+
+  String get weekday => _names[_weekday]!;
+  bool get isToday => _weekday == DateTime.now().weekday;
+
+  final _names = const {
+    DateTime.monday: 'Monday',
+    DateTime.tuesday: 'Tuesday',
+    DateTime.wednesday: 'Wednesday',
+    DateTime.thursday: 'Thursday',
+    DateTime.friday: 'Friday',
+    DateTime.saturday: 'Saturday',
+    DateTime.sunday: 'Sunday',
+  };
 }
 
 class InfoPage extends StatelessWidget {
   static String route = '/info';
 
-  final schedule = {
-    DateTime.monday: Schedule('monday', TimeOfDay(hour: 16, minute: 0),
+  final schedule = [
+    Schedule(DateTime.monday, TimeOfDay(hour: 16, minute: 0),
         TimeOfDay(hour: 23, minute: 0)),
-    DateTime.tuesday: Schedule('tuesday', TimeOfDay(hour: 16, minute: 0),
+    Schedule(DateTime.tuesday, TimeOfDay(hour: 16, minute: 0),
         TimeOfDay(hour: 23, minute: 0)),
-    DateTime.wednesday: Schedule('wednesday', TimeOfDay(hour: 16, minute: 0),
+    Schedule(DateTime.wednesday, TimeOfDay(hour: 16, minute: 0),
         TimeOfDay(hour: 23, minute: 0)),
-    DateTime.thursday: Schedule('thursday', TimeOfDay(hour: 16, minute: 0),
+    Schedule(DateTime.thursday, TimeOfDay(hour: 16, minute: 0),
         TimeOfDay(hour: 23, minute: 0)),
-    DateTime.friday: Schedule('friday', TimeOfDay(hour: 16, minute: 0),
+    Schedule(DateTime.friday, TimeOfDay(hour: 16, minute: 0),
         TimeOfDay(hour: 01, minute: 0)),
-    DateTime.saturday: Schedule('saturday', TimeOfDay(hour: 16, minute: 0),
+    Schedule(DateTime.saturday, TimeOfDay(hour: 16, minute: 0),
         TimeOfDay(hour: 01, minute: 0)),
-    DateTime.sunday: Schedule('sunday', TimeOfDay(hour: 16, minute: 0),
+    Schedule(DateTime.sunday, TimeOfDay(hour: 16, minute: 0),
         TimeOfDay(hour: 23, minute: 0)),
-  };
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +54,10 @@ class InfoPage extends StatelessWidget {
           InfoTile(
             leading: LucideIcons.mapPin,
             title: 'Address',
-            child: Text('R. Vale Formoso 9, 1950-277 Lisboa'),
+            child: Text(
+              'R. Vale Formoso 9, 1950-277 Lisboa',
+              style: theme.textTheme.bodyText1,
+            ),
           ),
           SizedBox(height: 32),
           InfoTile(
@@ -50,23 +66,19 @@ class InfoPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ...schedule.entries.map((schedule) {
-                  final color = schedule.key == DateTime.now().weekday
-                      ? theme.primaryColor
-                      : null;
+                ...schedule.map((day) {
+                  final style = theme.textTheme.bodyText1!.copyWith(
+                    color: day.isToday ? theme.primaryColor : null,
+                    height: 1.2,
+                  );
                   return Row(
-                    //TODO: width errors
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Text(day.weekday, style: style),
                       Text(
-                        schedule.value.weekday.capitalize(),
-                        style: TextStyle(color: color),
-                      ),
-                      Spacer(),
-                      Text(
-                        '${schedule.value.start.format(context)} - '
-                        '${schedule.value.end.format(context)}',
-                        style: TextStyle(color: color),
+                        '${day.start.format(context)} - '
+                        '${day.end.format(context)}',
+                        style: style,
                       ),
                     ],
                   );
@@ -102,18 +114,20 @@ class InfoTile extends StatelessWidget {
           child: Icon(leading, size: kSmallIconSize),
         ),
         SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: theme.textTheme.bodyText2!
-                  .copyWith(color: theme.colorScheme.onSurface),
-            ),
-            SizedBox(height: 8),
-            child,
-          ],
-        )
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                title,
+                style: theme.textTheme.bodyText2!
+                    .copyWith(color: theme.colorScheme.onSurface),
+              ),
+              SizedBox(height: 8),
+              child,
+            ],
+          ),
+        ),
       ],
     );
   }
