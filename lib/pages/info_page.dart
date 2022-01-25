@@ -8,7 +8,7 @@ class Schedule {
   final TimeOfDay start;
   final TimeOfDay end;
   const Schedule(this._weekday, this.start, this.end)
-      : assert(0 <= _weekday && _weekday <= 7);
+      : assert(1 <= _weekday && _weekday <= 7);
 
   String get weekday => _names[_weekday]!;
   bool get isToday => _weekday == DateTime.now().weekday;
