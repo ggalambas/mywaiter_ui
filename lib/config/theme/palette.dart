@@ -6,7 +6,7 @@ class Palette {
 
   static const ColorScheme colorScheme = ColorScheme.light(
     primary: Color(0xFF6246EA),
-    // secondary: ,
+    secondary: Color(0xFFEFEFEF),
     surface: Color(0xFFEFEFEF),
     background: Colors.white,
     error: red,
@@ -20,7 +20,7 @@ class Palette {
 
   static const ColorScheme darkColorScheme = ColorScheme.dark(
     primary: Color(0xFF7F5AF0),
-    // secondary: ,
+    secondary: Color(0xFF242629),
     surface: Color(0xFF242629),
     background: Color(0xFF16161A),
     error: red,

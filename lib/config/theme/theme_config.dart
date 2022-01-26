@@ -9,8 +9,6 @@ class ThemeConfig {
   static ThemeData get light => theme(Palette.colorScheme);
   static ThemeData get dark => theme(Palette.darkColorScheme);
 
-  static ScrollBehavior get scrollBehavior => CupertinoScrollBehavior();
-
   static void setSystemBarsStyle() =>
       SystemChrome.setSystemUIOverlayStyle(systemOverlayStyle);
 

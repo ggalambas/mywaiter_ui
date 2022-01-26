@@ -2,13 +2,11 @@ import 'dart:math';
 
 import 'package:badges/badges.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/components/cart_item.dart';
 import 'package:mywaiter_design/config/constants.dart';
-import 'package:mywaiter_design/config/theme/theme_config.dart';
 import 'package:mywaiter_design/widgets/price.dart';
 
 class Cart extends StatelessWidget {
@@ -24,38 +22,37 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final relativeMin = minHeight / screenHeight(context);
-    return ScrollConfiguration(
-      behavior: MaterialScrollBehavior(),
-      child: FlexibleBottomSheet(
-        minHeight: relativeMin,
-        initHeight: relativeMin,
-        isExpand: false,
-        anchors: [relativeMin, 1],
-        builder: (context, controller, offset) {
-          final isCompact = offset <= relativeMin;
-          return Material(
-            elevation: 6,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(kSheetBorderRadius),
+    return FlexibleBottomSheet(
+      minHeight: relativeMin,
+      initHeight: relativeMin,
+      isExpand: false,
+      anchors: [relativeMin, 1],
+      builder: (context, controller, offset) {
+        final isCompact = offset <= relativeMin;
+        return Material(
+          elevation: 6,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(
+                isCompact ? kBorderRadius : kSheetBorderRadius,
               ),
             ),
-            child: ScrollConfiguration(
-              behavior: ThemeConfig.scrollBehavior,
-              child: ListView(
-                controller: controller,
-                padding: EdgeInsets.symmetric(horizontal: kScreenPadding),
-                children: [
-                  isCompact
-                      ? compactView(context, controller)
-                      : draggable(context),
-                  for (var i = 0; i < 15; i++) CartItem(),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+          ),
+          color: theme.brightness == Brightness.dark
+              ? theme.colorScheme.surface
+              : null,
+          child: ListView.builder(
+            controller: controller,
+            padding: EdgeInsets.symmetric(horizontal: kScreenPadding),
+            itemCount: 1 + 15,
+            itemBuilder: (context, i) => i == 0
+                ? isCompact
+                    ? compactView(context, controller)
+                    : draggable(context)
+                : CartItem(),
+          ),
+        );
+      },
     );
   }
 
@@ -65,6 +62,7 @@ class Cart extends StatelessWidget {
     return GestureDetector(
       onTap: () =>
           controller.extent.addPixelDelta(screenHeight(context), context),
+      behavior: HitTestBehavior.translucent,
       child: Container(
         height: minHeight,
         padding: EdgeInsets.symmetric(horizontal: 24),
