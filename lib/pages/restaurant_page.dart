@@ -1,5 +1,6 @@
 import 'dart:math';
 
+// import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -160,25 +161,33 @@ class _RestaurantPageState extends State<RestaurantPage> {
           ),
         ),
       ),
-      bottomSheet: GestureDetector(
-        onTap: () {},
-        child: Material(
-          elevation: 6,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(kBorderRadius),
-          ),
-          child: Container(
-            height: 56,
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              children: [
-                Icon(LucideIcons.shoppingCart, size: kSmallIconSize),
-                SizedBox(width: 16),
-                Expanded(child: CartList()),
-                SizedBox(width: 16),
-                Price('13,80', style: theme.textTheme.bodyText1),
-              ],
-            ),
+      bottomSheet: Cart(),
+    );
+  }
+}
+
+class Cart extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return GestureDetector(
+      onTap: () {},
+      child: Material(
+        elevation: 6,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(kBorderRadius),
+        ),
+        child: Container(
+          height: 56,
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Row(
+            children: [
+              Icon(LucideIcons.shoppingCart, size: kSmallIconSize),
+              SizedBox(width: 16),
+              Expanded(child: CartList()),
+              SizedBox(width: 16),
+              Price('13,80', style: theme.textTheme.bodyText1),
+            ],
           ),
         ),
       ),
@@ -187,12 +196,10 @@ class _RestaurantPageState extends State<RestaurantPage> {
 }
 
 class CartList extends StatelessWidget {
-  // final List<Product> products;
-  // const CartList({this.products});
-
   final products = {
-    for (var e in List.generate(7, (i) => i)) e: Random(0).nextInt(2)
+    for (var e in List.generate(7, (i) => i)) e: Random().nextInt(4).clamp(1, 4)
   };
+
   final String name = 'Fábrica Bolina';
   late final String? imageUrl = 'https://via.placeholder.com/'
       '150/FFD800/FFFFFF/?text=${name.substring(0, 2)}';
@@ -210,7 +217,24 @@ class CartList extends StatelessWidget {
         children: [
           for (var i = 0; i < products.length && i < maxItems; i++) ...[
             Builder(builder: (context) {
-              return CircleAvatar(
+              final quantity = products.values.toList()[i];
+              return
+                  //  Badge(
+                  //   elevation: 0,
+                  //   animationType: BadgeAnimationType.scale,
+                  //   animationDuration: Duration(milliseconds: 200),
+                  //   showBadge: quantity > 1,
+                  //   badgeColor: theme.primaryColor,
+                  //   badgeContent: Text(
+                  //     '$quantity',
+                  //     textAlign: TextAlign.center,
+                  //     style: TextStyle(
+                  //       color: theme.colorScheme.onPrimary,
+                  //       fontSize: 10,
+                  //     ),
+                  //   ),
+                  // child:
+                  CircleAvatar(
                 radius: itemWidth / 2,
                 foregroundImage:
                     imageUrl != null ? NetworkImage(imageUrl!) : null,
@@ -219,6 +243,7 @@ class CartList extends StatelessWidget {
                   color: theme.colorScheme.onSurface,
                 ),
                 backgroundColor: theme.colorScheme.surface,
+                // ),
               );
             }),
             SizedBox(width: spacing),
