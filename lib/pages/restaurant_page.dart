@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:mywaiter_design/components/cart.dart';
 import 'package:mywaiter_design/components/product_item.dart';
 import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/config/theme/palette.dart';
 import 'package:mywaiter_design/config/theme/theme_config.dart';
+import 'package:mywaiter_design/pages/cart_sheet.dart';
 import 'package:mywaiter_design/pages/info_page.dart';
 import 'package:mywaiter_design/widgets/flexible_space_title.dart';
 import 'package:mywaiter_design/widgets/persistent_tab_bar.dart';
+import 'package:mywaiter_design/widgets/route_aware_state.dart';
 
 enum View { grid, list }
 
@@ -41,10 +42,26 @@ class RestaurantPage extends StatefulWidget {
 //TODO:
 //* orders
 //* search
-//* cart sheet
 //* checkout
 
-class _RestaurantPageState extends State<RestaurantPage> {
+class _RestaurantPageState extends RouteAwareState<RestaurantPage> {
+  @override
+  void onEnterScreen() => matchSystemBarWithCart();
+
+  @override
+  void onLeaveScreen() => resetSystemBar();
+
+  void matchSystemBarWithCart() {
+    if (ThemeConfig.isDarkMode)
+      ThemeConfig.setSystemBarsStyle(
+        systemNavigationBarColor: Palette.darkColorScheme.surface,
+      );
+  }
+
+  void resetSystemBar() {
+    if (ThemeConfig.isDarkMode) ThemeConfig.setSystemBarsStyle();
+  }
+
   var view = View.grid;
 
   final opened = true;
@@ -55,6 +72,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
     'Drinks',
     'Dessert',
   ];
+
+  bool showingCart = true;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +170,9 @@ class _RestaurantPageState extends State<RestaurantPage> {
                         padding: EdgeInsets.symmetric(
                           vertical: 8,
                           horizontal: view == View.grid ? 8 : 0,
-                        ),
+                        ).add(EdgeInsets.only(
+                          bottom: showingCart ? kToolbarHeight : 0,
+                        )),
                         child: Wrap(
                           children: [
                             for (var i = 0; i < 15; i++) ProductItem(view: view)
@@ -164,10 +185,11 @@ class _RestaurantPageState extends State<RestaurantPage> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 8),
-            child: Cart(),
-          ),
+          if (showingCart)
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: CartSheet(),
+            ),
         ],
       ),
     );

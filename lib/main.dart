@@ -6,6 +6,7 @@ import 'package:mywaiter_design/pages/info_page.dart';
 import 'package:mywaiter_design/pages/login_page.dart';
 import 'package:mywaiter_design/pages/product_page.dart';
 import 'package:mywaiter_design/pages/restaurant_page.dart';
+import 'package:mywaiter_design/widgets/route_aware_state.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,6 +43,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [RouteAwareState.observer],
       title: 'MyWaiter Design',
       theme: ThemeConfig.light,
       darkTheme: ThemeConfig.dark,
