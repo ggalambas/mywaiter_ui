@@ -1,6 +1,6 @@
 import 'dart:math';
 
-// import 'package:badges/badges.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -45,7 +45,6 @@ class RestaurantPage extends StatefulWidget {
 //TODO:
 //* orders
 //* search
-//* cart: prodcts badge
 //* cart sheet
 //* checkout
 
@@ -197,7 +196,7 @@ class Cart extends StatelessWidget {
 
 class CartList extends StatelessWidget {
   final products = {
-    for (var e in List.generate(7, (i) => i)) e: Random().nextInt(4).clamp(1, 4)
+    for (var e in List.generate(7, (i) => i)) e: Random().nextInt(4)
   };
 
   final String name = 'Fábrica Bolina';
@@ -218,32 +217,31 @@ class CartList extends StatelessWidget {
           for (var i = 0; i < products.length && i < maxItems; i++) ...[
             Builder(builder: (context) {
               final quantity = products.values.toList()[i];
-              return
-                  //  Badge(
-                  //   elevation: 0,
-                  //   animationType: BadgeAnimationType.scale,
-                  //   animationDuration: Duration(milliseconds: 200),
-                  //   showBadge: quantity > 1,
-                  //   badgeColor: theme.primaryColor,
-                  //   badgeContent: Text(
-                  //     '$quantity',
-                  //     textAlign: TextAlign.center,
-                  //     style: TextStyle(
-                  //       color: theme.colorScheme.onPrimary,
-                  //       fontSize: 10,
-                  //     ),
-                  //   ),
-                  // child:
-                  CircleAvatar(
-                radius: itemWidth / 2,
-                foregroundImage:
-                    imageUrl != null ? NetworkImage(imageUrl!) : null,
-                backgroundImage: Svg(
-                  'assets/logo.svg',
-                  color: theme.colorScheme.onSurface,
+              return Badge(
+                elevation: 0,
+                animationType: BadgeAnimationType.scale,
+                animationDuration: Duration(milliseconds: 200),
+                showBadge: quantity > 1,
+                badgeColor: theme.primaryColor,
+                position: BadgePosition.topEnd(top: -3, end: -3),
+                badgeContent: Text(
+                  '$quantity',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: theme.colorScheme.onPrimary,
+                    fontSize: 10,
+                  ),
                 ),
-                backgroundColor: theme.colorScheme.surface,
-                // ),
+                child: CircleAvatar(
+                  radius: itemWidth / 2,
+                  foregroundImage:
+                      imageUrl != null ? NetworkImage(imageUrl!) : null,
+                  backgroundImage: Svg(
+                    'assets/logo.svg',
+                    color: theme.colorScheme.onSurface,
+                  ),
+                  backgroundColor: theme.colorScheme.surface,
+                ),
               );
             }),
             SizedBox(width: spacing),

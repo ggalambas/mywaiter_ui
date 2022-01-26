@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   after_layout: ^1.1.0
+  badges: ^2.0.2
   bottom_sheet: ^1.0.5
   cupertino_icons: ^1.0.2
   flutter:
