@@ -17,9 +17,6 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-//TODO
-//* swap elevations with our custom made shadows
-
 class _HomePageState extends State<HomePage> {
   int tabIndex = 0;
 

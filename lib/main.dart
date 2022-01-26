@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mywaiter_design/config/theme/theme_config.dart';
 import 'package:mywaiter_design/pages/home_page.dart';

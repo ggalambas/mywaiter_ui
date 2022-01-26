@@ -19,9 +19,6 @@ class SearchTab extends StatefulWidget with HomeTab {
   State<SearchTab> createState() => _SearchTabState();
 }
 
-//TODO:
-//* placeholder image
-
 class _SearchTabState extends State<SearchTab> {
   // late final scrollController = ScrollController()
   //   ..addListener(() => setState(() {}));
