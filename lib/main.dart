@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scrollBehavior: CupertinoScrollBehavior(),
+      scrollBehavior: ThemeConfig.scrollBehavior,
       debugShowCheckedModeBanner: false,
       title: 'MyWaiter Design',
       theme: ThemeConfig.light,

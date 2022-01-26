@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,8 @@ import 'package:mywaiter_design/config/theme/theme.dart';
 class ThemeConfig {
   static ThemeData get light => theme(Palette.colorScheme);
   static ThemeData get dark => theme(Palette.darkColorScheme);
+
+  static ScrollBehavior get scrollBehavior => CupertinoScrollBehavior();
 
   static void setSystemBarsStyle() =>
       SystemChrome.setSystemUIOverlayStyle(systemOverlayStyle);

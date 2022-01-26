@@ -129,7 +129,6 @@ class _Sheet extends StatelessWidget {
             minHeight: minRelative,
             initHeight: minRelative,
             maxHeight: maxRelative,
-            isCollapsible: false,
             builder: (context, controller, _) => builder(context, controller),
           );
         },

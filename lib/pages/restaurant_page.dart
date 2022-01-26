@@ -59,103 +59,116 @@ class _RestaurantPageState extends State<RestaurantPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Scaffold(
-      bottomSheet: Cart(),
-      body: DefaultTabController(
-        length: categories.length,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, _) {
-            return [
-              SliverAppBar(
-                systemOverlayStyle: ThemeConfig.systemOverlayStyle,
-                pinned: true,
-                expandedHeight: kToolbarHeight + 12 + 20 * 1.5 * 1.2 + 8,
-                flexibleSpace: FlexibleSpaceTitle('Bolina'),
-                actions: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(LucideIcons.search),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(LucideIcons.clipboardList),
-                  ),
-                  IconButton(
-                    onPressed: () => setState(() => view = view.swap()),
-                    icon: Icon(view.swapIcon),
-                  ),
-                ],
-              ),
-              SliverToBoxAdapter(
-                child: InkWell(
-                  onTap: () => Navigator.pushNamed(context, InfoPage.route),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: kScreenPadding,
-                      vertical: 8,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('R. Vale Formoso 9'),
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  opened
-                                      ? TextSpan(
-                                          text: 'Opened',
-                                          style:
-                                              TextStyle(color: Palette.green),
-                                        )
-                                      : TextSpan(
-                                          text: 'Closed',
-                                          style: TextStyle(color: Palette.red),
-                                        ),
-                                  TextSpan(text: ' ∙ Closes at 23pm'),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Tap for more information',
-                              style:
-                                  TextStyle(color: theme.colorScheme.onSurface),
-                            ),
-                          ],
+    return SafeArea(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Scaffold(
+            body: DefaultTabController(
+              length: categories.length,
+              child: NestedScrollView(
+                headerSliverBuilder: (context, _) {
+                  return [
+                    SliverAppBar(
+                      systemOverlayStyle: ThemeConfig.systemOverlayStyle,
+                      pinned: true,
+                      expandedHeight: kToolbarHeight + 12 + 20 * 1.5 * 1.2 + 8,
+                      flexibleSpace: FlexibleSpaceTitle('Bolina'),
+                      actions: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(LucideIcons.search),
                         ),
-                        Icon(LucideIcons.chevronRight, size: kSmallIconSize),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(LucideIcons.clipboardList),
+                        ),
+                        IconButton(
+                          onPressed: () => setState(() => view = view.swap()),
+                          icon: Icon(view.swapIcon),
+                        ),
                       ],
                     ),
-                  ),
+                    SliverToBoxAdapter(
+                      child: InkWell(
+                        onTap: () =>
+                            Navigator.pushNamed(context, InfoPage.route),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: kScreenPadding,
+                            vertical: 8,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('R. Vale Formoso 9'),
+                                  Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        opened
+                                            ? TextSpan(
+                                                text: 'Opened',
+                                                style: TextStyle(
+                                                    color: Palette.green),
+                                              )
+                                            : TextSpan(
+                                                text: 'Closed',
+                                                style: TextStyle(
+                                                    color: Palette.red),
+                                              ),
+                                        TextSpan(text: ' ∙ Closes at 23pm'),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    'Tap for more information',
+                                    style: TextStyle(
+                                        color: theme.colorScheme.onSurface),
+                                  ),
+                                ],
+                              ),
+                              Icon(LucideIcons.chevronRight,
+                                  size: kSmallIconSize),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: PersistentTabBar(categories: categories),
+                    ),
+                  ];
+                },
+                body: TabBarView(
+                  children: [
+                    ...categories.map(
+                      (_) => SingleChildScrollView(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: view == View.grid ? 8 : 0,
+                        ),
+                        child: Wrap(
+                          children: [
+                            for (var i = 0; i < 15; i++) ProductItem(view: view)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: PersistentTabBar(categories: categories),
-              ),
-            ];
-          },
-          body: TabBarView(
-            children: [
-              ...categories.map(
-                (_) => SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: view == View.grid ? 8 : 0,
-                  ),
-                  child: Wrap(
-                    children: [
-                      for (var i = 0; i < 15; i++) ProductItem(view: view)
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.only(top: 8),
+            child: Cart(),
+          ),
+        ],
       ),
     );
   }
