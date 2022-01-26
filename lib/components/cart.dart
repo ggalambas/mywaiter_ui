@@ -41,15 +41,23 @@ class Cart extends StatelessWidget {
           color: theme.brightness == Brightness.dark
               ? theme.colorScheme.surface
               : null,
-          child: ListView.builder(
+          child: ListView(
             controller: controller,
-            padding: EdgeInsets.symmetric(horizontal: kScreenPadding),
-            itemCount: 1 + 15,
-            itemBuilder: (context, i) => i == 0
-                ? isCompact
-                    ? compactView(context, controller)
-                    : draggable(context)
-                : CartItem(),
+            children: [
+              isCompact ? compactView(context, controller) : draggable(context),
+              AppBar(
+                automaticallyImplyLeading: false,
+                title: Text('Your Cart'),
+                actions: [
+                  IconButton(
+                    //TODO clear cart
+                    onPressed: () {},
+                    icon: Icon(LucideIcons.listX),
+                  )
+                ],
+              ),
+              ...List.generate(7, (_) => CartItem()),
+            ],
           ),
         );
       },
