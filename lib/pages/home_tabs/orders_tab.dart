@@ -17,7 +17,7 @@ class OrdersTab extends StatelessWidget with HomeTab {
 
   //TODO:
   //* profile
-  //* orders
+  //* order view
 
   @override
   PreferredSizeWidget get appBar => AppBar(

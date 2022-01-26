@@ -68,7 +68,7 @@ class _SheetScaffoldState extends State<SheetScaffold>
                 height: bodyHeight + trailingHeight,
                 builder: (context, controller) => Material(
                   key: bodyKey,
-                  elevation: 2,
+                  elevation: 6,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(kSheetBorderRadius),

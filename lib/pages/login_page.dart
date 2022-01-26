@@ -14,6 +14,10 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+//TODO:
+//* register
+//* forgot password
+
 class _LoginPageState extends State<LoginPage> {
   bool obscurePassword = true;
 
