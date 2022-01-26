@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-import 'package:mywaiter_design/config/constants.dart';
+import 'package:mywaiter_design/components/quantity_buttons.dart';
 import 'package:mywaiter_design/widgets/price.dart';
 import 'package:mywaiter_design/widgets/sheet_scaffold.dart';
 
@@ -20,9 +19,6 @@ class _ProductPageState extends State<ProductPage> {
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo sodales dignissim. Etiam dapibus ut massa et pharetra. Praesent sit amet vehicula mauris, id congue nibh. Nullam consectetur pharetra velit, quis auctor magna interdum vitae. Proin enim lectus, eleifend ac neque a, dignissim blandit odio.';
 
   var quantity = 1;
-  void changeQuantity(int increment) => setState(() {
-        if (quantity + increment >= 1) quantity += increment;
-      });
 
   double get screenHeight =>
       MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
@@ -66,32 +62,10 @@ class _ProductPageState extends State<ProductPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Price(price, style: theme.textTheme.headline4),
-              StatefulBuilder(builder: (context, setPrice) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    quantityButton(
-                      context,
-                      icon: LucideIcons.minus,
-                      onTap: () => setPrice(() => changeQuantity(-1)),
-                    ),
-                    SizedBox.square(
-                      dimension: 30,
-                      child: Center(
-                        child: Text(
-                          '$quantity',
-                          style: theme.textTheme.bodyText2,
-                        ),
-                      ),
-                    ),
-                    quantityButton(
-                      context,
-                      icon: LucideIcons.plus,
-                      onTap: () => setPrice(() => changeQuantity(1)),
-                    ),
-                  ],
-                );
-              }),
+              QuantityButtons(
+                quantity: quantity,
+                onChanged: (qty) => setState(() => quantity = qty),
+              ),
             ],
           ),
           SizedBox(height: 12),
@@ -100,33 +74,6 @@ class _ProductPageState extends State<ProductPage> {
             style: TextStyle(color: theme.colorScheme.onSurface),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget quantityButton(
-    BuildContext context, {
-    required IconData icon,
-    VoidCallback? onTap,
-  }) {
-    final theme = Theme.of(context);
-    final borderRadius = BorderRadius.circular(15);
-    return InkWell(
-      onTap: onTap,
-      borderRadius: borderRadius,
-      child: Container(
-        width: 30,
-        height: 30,
-        decoration: BoxDecoration(
-          border: Border.all(color: theme.primaryColor),
-          borderRadius: borderRadius,
-        ),
-        alignment: Alignment.center,
-        child: Icon(
-          icon,
-          size: kSmallIconSize,
-          color: theme.primaryColor,
-        ),
       ),
     );
   }

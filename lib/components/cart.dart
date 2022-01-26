@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:mywaiter_design/config/constants.dart';
+import 'package:mywaiter_design/pages/cart_sheet.dart';
 import 'package:mywaiter_design/widgets/price.dart';
 
 class Cart extends StatelessWidget {
@@ -12,7 +13,7 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () => CartSheet.open(context),
       child: Material(
         elevation: 6,
         borderRadius: BorderRadius.vertical(

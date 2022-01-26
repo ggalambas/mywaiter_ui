@@ -73,10 +73,7 @@ class ProductItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    productTitle,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  Text(productTitle, overflow: TextOverflow.ellipsis),
                   SizedBox(height: 4),
                   price(context),
                 ],
