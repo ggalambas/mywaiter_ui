@@ -10,18 +10,13 @@ import 'package:mywaiter_design/config/constants.dart';
 import 'package:mywaiter_design/widgets/price.dart';
 
 class Cart extends StatelessWidget {
-  final minHeight = 56.0;
-
   double screenHeight(BuildContext context) =>
       MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
-
-  //TODO
-  //* checkout button
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final relativeMin = minHeight / screenHeight(context);
+    final relativeMin = kToolbarHeight / screenHeight(context);
     return FlexibleBottomSheet(
       minHeight: relativeMin,
       initHeight: relativeMin,
@@ -50,13 +45,38 @@ class Cart extends StatelessWidget {
                 title: Text('Your Cart'),
                 actions: [
                   IconButton(
-                    //TODO clear cart
                     onPressed: () {},
                     icon: Icon(LucideIcons.listX),
-                  )
+                  ),
                 ],
               ),
               ...List.generate(7, (_) => CartItem()),
+              SizedBox(height: 16),
+              ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'TOTAL',
+                      style: TextStyle(color: theme.colorScheme.onSurface),
+                    ),
+                    Price(
+                      '13,80',
+                      style: theme.textTheme.headline6!.copyWith(height: 1),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Place Order'),
+                ),
+              ].map((widget) => Padding(
+                    padding: EdgeInsets.symmetric(horizontal: kScreenPadding),
+                    child: widget,
+                  )),
+              SizedBox(height: kScreenPadding),
             ],
           ),
         );
@@ -72,7 +92,7 @@ class Cart extends StatelessWidget {
           controller.extent.addPixelDelta(screenHeight(context), context),
       behavior: HitTestBehavior.translucent,
       child: Container(
-        height: minHeight,
+        height: kToolbarHeight,
         padding: EdgeInsets.symmetric(horizontal: 24),
         child: Row(
           children: [
